@@ -147,13 +147,7 @@ public class LocationActivity extends BaseActivity implements OnMapReadyCallback
 
         }
 
-        locationManager.requestLocationUpdates(bestProvider, 20000, 0, this);
-
-        Circle circle = googleMap.addCircle(new CircleOptions()
-                .center(new LatLng(-33.87365, 151.20689))
-                .radius(100000)
-                .strokeColor(Color.RED)
-                .fillColor(Color.BLUE));
+        //locationManager.requestLocationUpdates(bestProvider, 20000, 0, this);
     }
 
     private void requestLocationPermissions () {
@@ -177,6 +171,12 @@ public class LocationActivity extends BaseActivity implements OnMapReadyCallback
         System.out.println("latitude :::: " + MyApplication.g_latitude + " longitude :::: " + MyApplication.g_longitude);
         //googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
         setLocation(MyApplication.g_latitude, MyApplication.g_longitude, "Driver Location");
+
+        Circle circle = googleMap.addCircle(new CircleOptions()
+                .center(new LatLng(MyApplication.g_latitude, MyApplication.g_longitude))
+                .radius(100000)
+                .strokeColor(Color.RED)
+                .fillColor(Color.RED));
     }
 
     @Override
