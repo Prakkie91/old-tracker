@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.intro.SignupActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background_color">
+
+        <ImageView
+            android:id="@+id/iv"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:background="@drawable/ic_logo"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/_40sdp"/>
+
+        <EditText
+            android:id="@+id/nameET"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginLeft="@dimen/_25sdp"
+            android:layout_marginRight="@dimen/_25sdp"
+            android:layout_below="@id/iv"
+            android:layout_marginTop="@dimen/_40sdp"
+            android:background="@drawable/input_background"
+            android:paddingLeft="@dimen/_15sdp"
+            android:paddingRight="@dimen/_15sdp"
+            android:textColor="#fff"
+            android:textColorHint="#fff"
+            android:textSize="@dimen/_15sdp"
+            android:hint="Full name"
+            />
+
+        <EditText
+            android:id="@+id/idET"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginLeft="@dimen/_25sdp"
+            android:layout_marginRight="@dimen/_25sdp"
+            android:layout_below="@id/nameET"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@drawable/input_background"
+            android:paddingLeft="@dimen/_15sdp"
+            android:paddingRight="@dimen/_15sdp"
+            android:textColor="#fff"
+            android:textColorHint="#fff"
+            android:textSize="@dimen/_15sdp"
+            android:hint="Hong Kong ID"
+            />
+
+        <EditText
+            android:id="@+id/phoneET"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginLeft="@dimen/_25sdp"
+            android:layout_marginRight="@dimen/_25sdp"
+            android:layout_below="@id/idET"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@drawable/input_background"
+            android:paddingLeft="@dimen/_15sdp"
+            android:paddingRight="@dimen/_15sdp"
+            android:textColor="#fff"
+            android:textColorHint="#fff"
+            android:textSize="@dimen/_15sdp"
+            android:hint="Phone"
+            android:inputType="phone"/>
+
+        <EditText
+            android:id="@+id/passwordET"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginLeft="@dimen/_25sdp"
+            android:layout_marginRight="@dimen/_25sdp"
+            android:layout_below="@id/phoneET"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@drawable/input_background"
+            android:paddingLeft="@dimen/_15sdp"
+            android:paddingRight="@dimen/_15sdp"
+            android:textColor="#fff"
+            android:textColorHint="#fff"
+            android:textSize="@dimen/_15sdp"
+            android:hint="Password"
+            android:inputType="textPassword" />
+
+        <TextView
+            android:id="@+id/termDescTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="By clicking Sign Up, you are agreeing to our"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/background_tv_color"
+            android:textSize="@dimen/_11sdp"
+            android:layout_below="@+id/passwordET"/>
+
+        <TextView
+            android:id="@+id/termTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Terms and Conditions"
+            android:layout_centerHorizontal="true"
+            android:textColor="#fff"
+            android:textSize="@dimen/_11sdp"
+            android:layout_below="@+id/termDescTV"
+            android:clickable="true"/>
+
+        <Button
+            android:id="@+id/signupBtn"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:background="@drawable/blue_btn_background"
+            android:layout_marginLeft="@dimen/_25sdp"
+            android:layout_marginRight="@dimen/_25sdp"
+            android:layout_below="@id/termTV"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="Sign Up"
+            android:textColor="#fff"
+            android:textSize="@dimen/_15sdp"
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:layout_centerHorizontal="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Do not have an account already?"
+                android:textColor="@color/txt_color"
+                android:textSize="@dimen/_12sdp"/>
+
+            <TextView
+                android:id="@+id/loginTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Log in"
+                android:textColor="#fff"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:textSize="@dimen/_13sdp"
+                android:clickable="true"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>

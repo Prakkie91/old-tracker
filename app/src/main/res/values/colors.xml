@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="background_color">#0080ff</color>
+    <color name="background_tv_color">#02b2ff</color>
+    <color name="txt_color">#9fe1fe</color>
+    <color name="background_btn_color">#0051ff</color>
+    <color name="background_btn_color_pressed">#66A6ff</color>
+    <color name="toolbar_color">#eee</color>
+    <color name="txt_gray_color">#888</color>
+    <color name="background_btn_red_color">#b00</color>
+    <color name="background_btn_red_color_pressed">#f77</color>
+</resources>
