@@ -50,7 +50,7 @@ public class LocationActivity extends BaseActivity implements OnMapReadyCallback
         SupportMapFragment fragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.googleMap);
         fragment.getMapAsync(this);
 
-        readyGPS();
+        //readyGPS();
 
         /** Check Permission **/
 
@@ -76,6 +76,14 @@ public class LocationActivity extends BaseActivity implements OnMapReadyCallback
                 MyApplication.g_latitude = MyApplication.g_GPSTracker.getLatitude(); // returns latitude
                 MyApplication.g_longitude = MyApplication.g_GPSTracker.getLongitude(); // returns longitude
                 //showToast("lat: " + MyApplication.g_latitude + ", lang: " + MyApplication.g_longitude);
+
+                setLocation(MyApplication.g_latitude, MyApplication.g_longitude, "Driver Location");
+
+                Circle circle = googleMap.addCircle(new CircleOptions()
+                        .center(new LatLng(MyApplication.g_latitude, MyApplication.g_longitude))
+                        .radius(100000)
+                        .strokeColor(Color.RED)
+                        .fillColor(Color.RED));
             } else {
                 MyApplication.g_GPSTracker.showSettingsAlert();
             }
@@ -128,6 +136,9 @@ public class LocationActivity extends BaseActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         this.googleMap = googleMap;
+
+        readyGPS();
+
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 

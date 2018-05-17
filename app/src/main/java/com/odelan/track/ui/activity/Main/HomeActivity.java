@@ -1,5 +1,6 @@
 package com.odelan.track.ui.activity.Main;
 
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -10,6 +11,7 @@ import com.odelan.track.R;
 import com.odelan.track.ui.activity.Main.views.HomeView;
 import com.odelan.track.ui.activity.Main.views.OrdersView;
 import com.odelan.track.ui.activity.Main.views.SettingsView;
+import com.odelan.track.ui.activity.Main.views.TestView;
 import com.odelan.track.ui.base.BaseActivity;
 
 import java.util.ArrayList;
@@ -26,6 +28,7 @@ public class HomeActivity extends BaseActivity {
     HomeView homeView;
     OrdersView ordersView;
     SettingsView settingsView;
+    TestView testView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,18 +38,19 @@ public class HomeActivity extends BaseActivity {
         ButterKnife.bind(this);
         mContext = this;
 
-        initUI();
+        initUI(savedInstanceState);
     }
 
-    private void initUI() {
+    private void initUI(Bundle savedInstanceState) {
         homeView = new HomeView(HomeActivity.this);
         ordersView = new OrdersView(HomeActivity.this);
         settingsView = new SettingsView(HomeActivity.this);
+        testView = new TestView(HomeActivity.this, savedInstanceState);
 
         viewPager.setAdapter(new PagerAdapter() {
             @Override
             public int getCount() {
-                return 3;
+                return 4;
             }
 
             @Override
@@ -68,6 +72,8 @@ public class HomeActivity extends BaseActivity {
                     view = ordersView.mContainerView;
                 } else if (position == 2) {
                     view = settingsView.mContainerView;
+                } else if (position == 3) {
+                    view = testView.mContainerView;
                 }
 
                 container.addView(view);
@@ -100,6 +106,16 @@ public class HomeActivity extends BaseActivity {
                         getResources().getColor(R.color.background_btn_color_pressed))
                         //.selectedIcon(getResources().getDrawable(R.drawable.ic_seventh))
                         .title("Settings")
+                        .badgeTitle("")
+                        .build()
+        );
+
+        models.add(
+                new NavigationTabBar.Model.Builder(
+                        getResources().getDrawable(R.drawable.ic_fourth),
+                        getResources().getColor(R.color.background_btn_color_pressed))
+                        //.selectedIcon(getResources().getDrawable(R.drawable.ic_seventh))
+                        .title("Map")
                         .badgeTitle("")
                         .build()
         );
@@ -140,5 +156,13 @@ public class HomeActivity extends BaseActivity {
                 }
             }
         }, 500);*/
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        if (testView.onRequestPermissionsResult(requestCode, permissions, grantResults)) {
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
     }
 }
