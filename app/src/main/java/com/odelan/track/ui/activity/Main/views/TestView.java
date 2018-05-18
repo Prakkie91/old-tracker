@@ -75,7 +75,6 @@ public class TestView extends BaseView {
             if (MyApplication.g_GPSTracker.canGetLocation()) {
                 MyApplication.g_latitude = MyApplication.g_GPSTracker.getLatitude(); // returns latitude
                 MyApplication.g_longitude = MyApplication.g_GPSTracker.getLongitude(); // returns longitude
-                //showToast("lat: " + MyApplication.g_latitude + ", lang: " + MyApplication.g_longitude);
 
                 setLocation(MyApplication.g_latitude, MyApplication.g_longitude, "Driver Location");
 

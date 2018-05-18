@@ -33,7 +33,8 @@
                         android:layout_alignParentRight="true"
                         android:clickable="true"
                         android:src="@drawable/ic_pin"
-                        android:padding="@dimen/_10sdp"/>
+                        android:padding="@dimen/_10sdp"
+                        android:visibility="gone"/>
                 </RelativeLayout>
             </android.support.v7.widget.Toolbar>
 
@@ -58,19 +59,12 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/_40sdp"
-            android:layout_marginLeft="@dimen/_15sdp"
-            android:layout_marginRight="@dimen/_15sdp"
             android:orientation="vertical">
 
-            <Button
-                android:id="@+id/orderBtn"
+            <com.google.android.gms.maps.MapView
+                android:id="@+id/mapView"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_40sdp"
-                android:background="@drawable/blue_btn_background"
-                android:text="Order #1"
-                android:textColor="#fff"
-                android:textSize="@dimen/_15sdp"/>
+                android:layout_height="match_parent" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
