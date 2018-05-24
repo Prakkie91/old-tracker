@@ -4,30 +4,24 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
+import android.widget.ImageView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.Circle;
-import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.LatLngBounds;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.odelan.track.MyApplication;
 import com.odelan.track.R;
-import com.odelan.track.data.model.Area;
-import com.odelan.track.ui.activity.Main.CurrentOrderDetailActivity;
+import com.odelan.track.data.model.Order;
 import com.odelan.track.ui.activity.Main.HomeActivity;
 import com.odelan.track.ui.activity.Main.LocationActivity;
+import com.odelan.track.ui.activity.Main.OrderDetailActivity;
 import com.odelan.track.utils.GPSTracker;
 import com.odelan.track.utils.GoogleMapHelper;
 
@@ -45,6 +39,9 @@ public class HomeView extends BaseView {
     @BindView(R.id.mapView)
     MapView mapView;
 
+    @BindView(R.id.recordIV)
+    ImageView recordIV;
+
     private GoogleMap googleMap;
     private GoogleMapHelper googleMapHelper;
 
@@ -55,15 +52,17 @@ public class HomeView extends BaseView {
             Manifest.permission.ACCESS_NETWORK_STATE
     };
 
-    public List<Area> mData = new ArrayList<>();
+    public List<Order> mData = new ArrayList<>();
+
+    boolean isRecording = false;
+
+    @Override
+    protected int getLayoutResID() {
+        return R.layout.item_home;
+    }
 
     public HomeView(HomeActivity context, Bundle savedInstanceState) {
         super(context);
-
-        mContainerView = LayoutInflater.from(
-                mContext.getBaseContext()).inflate(R.layout.item_home, null, false);
-
-        ButterKnife.bind(this, mContainerView);
 
         mapView.onCreate(savedInstanceState);
         mapView.onResume();
@@ -73,25 +72,36 @@ public class HomeView extends BaseView {
             public void onMapReady(GoogleMap mMap) {
                 googleMap = mMap;
                 googleMapHelper = new GoogleMapHelper(mMap);
+                googleMap.setOnCircleClickListener(new GoogleMap.OnCircleClickListener() {
+                    @Override
+                    public void onCircleClick(Circle circle) {
+                        mContext.startActivity(new Intent(mContext, OrderDetailActivity.class));
+                        if (circle.getTag().toString() != null) {
+                            OrderDetailActivity.mOrder = getOrderWithID(circle.getTag().toString());
+                        }
+                    }
+                });
 
                 if (!hasPermissionsGranted(PERMISSIONS)) {
                     requestPermissions(PERMISSIONS);
                 } else {
                     readyGPS();
-                    //initMap();
                 }
             }
         });
+
+        recordIV.setImageResource(R.drawable.ic_record_stoped);
     }
 
+    @SuppressLint("MissingPermission")
     public void readyGPS() {
         if(mContext != null) {
             MyApplication.g_GPSTracker = new GPSTracker(mContext);
             if (MyApplication.g_GPSTracker.canGetLocation()) {
-                MyApplication.g_latitude = MyApplication.g_GPSTracker.getLatitude(); // returns latitude
-                MyApplication.g_longitude = MyApplication.g_GPSTracker.getLongitude(); // returns longitude
+                MyApplication.g_latitude = MyApplication.g_GPSTracker.getLatitude();
+                MyApplication.g_longitude = MyApplication.g_GPSTracker.getLongitude();
 
-                //setLocation(MyApplication.g_latitude, MyApplication.g_longitude, "Driver Location");
+                googleMap.setMyLocationEnabled(true);
                 showData();
             } else {
                 MyApplication.g_GPSTracker.showSettingsAlert();
@@ -102,29 +112,42 @@ public class HomeView extends BaseView {
     public void getData() {
         mData = new ArrayList<>();
 
-        Area item = new Area();
-        item.aid = "1";
+        Order item = new Order();
+        item.oid = "1";
+        item.title = "Order1";
         item.lat = MyApplication.g_latitude - 0.1;
         item.lng = MyApplication.g_longitude - 0.1;
         item.radius = 5000;
         mData.add(item);
 
-        item = new Area();
-        item.aid = "2";
+        item = new Order();
+        item.oid = "2";
+        item.title = "Order2";
         item.lat = MyApplication.g_latitude -0.1515;
         item.lng = MyApplication.g_longitude + 0.1212;
         item.radius = 10000;
         mData.add(item);
 
-        item = new Area();
-        item.aid = "3";
+        item = new Order();
+        item.oid = "3";
+        item.title = "Order3";
         item.lat = MyApplication.g_latitude + 0.3;
         item.lng = MyApplication.g_longitude - 0.3;
         item.radius = 8000;
         mData.add(item);
     }
 
+    public Order getOrderWithID(String oid) {
+        for (Order o : mData) {
+            if (o.oid == oid) {
+                return o;
+            }
+        }
+        return null;
+    }
+
     private void showData() {
+
         getData();
         LatLng myLocation = new LatLng(MyApplication.g_latitude, MyApplication.g_longitude);
         googleMapHelper.addMaker(myLocation);
@@ -132,28 +155,16 @@ public class HomeView extends BaseView {
         List<LatLng>bounds = new ArrayList<>();
         bounds.add(myLocation);
 
-        for (Area item : mData) {
+        for (Order item : mData) {
             LatLng latLng = new LatLng(item.lat, item.lng);
             bounds.add(latLng);
-            //googleMapHelper.addMaker(latLng);
-            googleMapHelper.addCircle(latLng, item.radius);
+
+            Circle circle = googleMapHelper.addCircle(latLng, item.radius);
+            circle.setTag(item.oid);
+            circle.setClickable(true);
         }
 
         googleMapHelper.moveCameraPoint(myLocation, 9);
-        //googleMapHelper.moveCameraBounds(bounds, 20);
-    }
-
-    @SuppressLint("MissingPermission")
-    public void initMap() {
-        googleMap.setMyLocationEnabled(true);
-
-        // For dropping a marker at a point on the Map
-        LatLng sydney = new LatLng(-34, 151);
-        googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker Title").snippet("Marker Description"));
-
-        // For zooming automatically to the location of the marker
-        CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(12).build();
-        googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
     }
 
     private boolean hasPermissionsGranted (String[] permissions) {
@@ -202,8 +213,16 @@ public class HomeView extends BaseView {
         return false;
     }
 
-    @OnClick(R.id.mapIV) public void onMap() {
-        mContext.startActivity(new Intent(mContext, LocationActivity.class));
+    @OnClick(R.id.recordIV) public void onMap() {
+        if (isRecording) {
+            isRecording = false;
+            recordIV.setImageResource(R.drawable.ic_record_stoped);
+            mContext.showToast("Recording Stopped.");
+        } else {
+            isRecording = true;
+            recordIV.setImageResource(R.drawable.ic_record_started);
+            mContext.showToast("Recording Started.");
+        }
     }
 }
 

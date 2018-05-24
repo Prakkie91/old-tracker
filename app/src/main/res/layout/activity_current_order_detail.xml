@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.activity.Main.CurrentOrderDetailActivity">
 
     <android.support.design.widget.AppBarLayout
@@ -31,9 +32,9 @@
                         android:id="@+id/backIV"
                         android:layout_width="?attr/actionBarSize"
                         android:layout_height="?attr/actionBarSize"
+                        android:clickable="true"
                         android:paddingRight="@dimen/_20sdp"
-                        android:src="@drawable/ic_back_black"
-                        android:clickable="true"/>
+                        android:src="@drawable/ic_back_black" />
                 </RelativeLayout>
             </android.support.v7.widget.Toolbar>
 
@@ -53,69 +54,122 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="@dimen/_15sdp"
-        android:layout_marginRight="@dimen/_15sdp"
-        android:gravity="center_horizontal"
         android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_120sdp"
-            android:text="ABOUT THE ORDER"
-            android:textSize="@dimen/_18sdp"
-            android:textStyle="bold"
-            android:textColor="@color/txt_gray_color"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:text="Address HKUST UG HALL 6"
-            android:textSize="@dimen/_13sdp"
-            android:textColor="@color/txt_gray_color"/>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="@dimen/_50sdp"
-            android:layout_marginLeft="@dimen/_10sdp"
-            android:layout_marginRight="@dimen/_10sdp">
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/_15sdp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ad region: "
+                    android:textSize="@dimen/_14sdp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tsim Sha Thai"
+                    android:textSize="@dimen/_14sdp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ad Type: "
+                    android:textSize="@dimen/_14sdp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ad type "
+                    android:textSize="@dimen/_14sdp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ad size: "
+                    android:textSize="@dimen/_14sdp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="10 X 10 (Km)"
+                    android:textSize="@dimen/_14sdp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ad period: "
+                    android:textSize="@dimen/_14sdp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="May, 2018 to June, 2018"
+                    android:textSize="@dimen/_14sdp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Amount: "
+                    android:textSize="@dimen/_14sdp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="HKD $1000"
+                    android:textSize="@dimen/_14sdp"/>
+            </LinearLayout>
 
             <Button
-                android:id="@+id/pickBtn"
-                android:layout_width="0dp"
-                android:layout_weight="1"
+                android:id="@+id/cancelBtn"
+                android:layout_width="@dimen/_120sdp"
                 android:layout_height="@dimen/_40sdp"
+                android:layout_gravity="center_horizontal"
                 android:background="@drawable/blue_btn_background"
-                android:text="Pick up"
+                android:layout_marginLeft="@dimen/_25sdp"
+                android:layout_marginRight="@dimen/_25sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:text="Cancel"
                 android:textColor="#fff"
-                android:textSize="@dimen/_15sdp"/>
-
-            <Button
-                android:id="@+id/deliverBtn"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/_40sdp"
-                android:layout_weight="1"
-                android:layout_marginLeft="@dimen/_20sdp"
-                android:background="@drawable/blue_btn_background"
-                android:text="Delivered"
-                android:textColor="#fff"
-                android:textSize="@dimen/_15sdp"/>
+                android:textSize="@dimen/_15sdp" />
         </LinearLayout>
-
-        <Button
-            android:id="@+id/cancelBtn"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_40sdp"
-            android:layout_marginLeft="@dimen/_40sdp"
-            android:layout_marginRight="@dimen/_40sdp"
-            android:layout_marginTop="@dimen/_30sdp"
-            android:background="@drawable/red_btn_background"
-            android:text="Cancel Order"
-            android:textColor="#fff"
-            android:textSize="@dimen/_15sdp"/>
     </LinearLayout>
-
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>

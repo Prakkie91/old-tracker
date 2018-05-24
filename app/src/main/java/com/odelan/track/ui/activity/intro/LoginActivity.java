@@ -21,12 +21,13 @@ public class LoginActivity extends BaseActivity {
     EditText passworkET;
 
     @Override
+    protected int getLayoutResID() {
+        return R.layout.activity_login;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-
-        mContext = this;
-        ButterKnife.bind(this);
     }
 
     @OnClick (R.id.signupTV) public void onSignup() {

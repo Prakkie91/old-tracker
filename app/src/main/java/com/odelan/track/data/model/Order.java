@@ -7,10 +7,17 @@ import com.bluelinelabs.logansquare.annotation.JsonObject;
  */
 
 @JsonObject
-public class Area extends BaseModel {
+public class Order extends BaseModel {
+
+    public static final String STATUS_PENDING = "pending";
+    public static final String STATUS_ACCEPTED = "accepted";
+    public static final String STATUS_COMPLETED = "completed";
 
     @JsonField(name = "id")
-    public String aid;
+    public String oid;
+
+    @JsonField(name = "title")
+    public String title;
 
     @JsonField(name = "lat")
     public double lat;

@@ -24,12 +24,13 @@ public class DriverLicenseActivity extends BaseActivity {
 
 
     @Override
+    protected int getLayoutResID() {
+        return R.layout.activity_driver_license;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_driver_license);
-
-        mContext = this;
-        ButterKnife.bind(this);
     }
 
     @OnClick(R.id.nextBtn) public void onNext() {

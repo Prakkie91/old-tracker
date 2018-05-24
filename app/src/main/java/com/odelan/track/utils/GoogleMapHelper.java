@@ -101,9 +101,10 @@ public class GoogleMapHelper {
         return mMap.addCircle(new CircleOptions()
                 .center(latlng)
                 .radius(radius)
-                .strokeColor(Color.BLUE)
-                .strokeWidth(2.0f)
-                .fillColor(Color.parseColor("#500000ff")));
+                //.strokeColor(Color.BLUE)
+                .strokeColor(Color.parseColor("#5000ff"))
+                .strokeWidth(3.0f)
+                .fillColor(Color.parseColor("#208000ff")));
     }
 
     public Circle addCircle(LatLng latlng, double radius, int strokeColor, int fillColor) {
@@ -111,7 +112,7 @@ public class GoogleMapHelper {
                 .center(latlng)
                 .radius(radius)
                 .strokeColor(strokeColor)
-                .strokeWidth(2.0f)
+                .strokeWidth(3.0f)
                 .fillColor(fillColor));
     }
 

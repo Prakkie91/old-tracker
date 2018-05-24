@@ -28,12 +28,13 @@ public class SignupActivity extends BaseActivity {
     EditText passworkET;
 
     @Override
+    protected int getLayoutResID() {
+        return R.layout.activity_signup;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_signup);
-
-        mContext = this;
-        ButterKnife.bind(this);
     }
 
     @OnClick(R.id.signupBtn) public void onSignup() {

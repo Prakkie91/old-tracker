@@ -21,12 +21,13 @@ public class IntroActivity extends BaseActivity {
     Uri video;
 
     @Override
+    protected int getLayoutResID() {
+        return R.layout.activity_intro;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_intro);
-
-        ButterKnife.bind(this);
-        mContext = this;
 
         video = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.hello);
         videoView.setVideoURI(video);

@@ -9,8 +9,7 @@ import android.view.ViewGroup;
 import com.odelan.track.R;
 import com.odelan.track.ui.activity.Main.views.HomeView;
 import com.odelan.track.ui.activity.Main.views.OrdersView;
-import com.odelan.track.ui.activity.Main.views.SettingsView;
-import com.odelan.track.ui.activity.Main.views.TestView;
+import com.odelan.track.ui.activity.Main.views.AccountView;
 import com.odelan.track.ui.base.BaseActivity;
 
 import java.util.ArrayList;
@@ -26,15 +25,16 @@ public class HomeActivity extends BaseActivity {
 
     HomeView homeView;
     OrdersView ordersView;
-    SettingsView settingsView;
+    AccountView settingsView;
+
+    @Override
+    protected int getLayoutResID() {
+        return R.layout.activity_home;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
-
-        ButterKnife.bind(this);
-        mContext = this;
 
         initUI(savedInstanceState);
     }
@@ -42,7 +42,7 @@ public class HomeActivity extends BaseActivity {
     private void initUI(Bundle savedInstanceState) {
         homeView = new HomeView(HomeActivity.this, savedInstanceState);
         ordersView = new OrdersView(HomeActivity.this);
-        settingsView = new SettingsView(HomeActivity.this);
+        settingsView = new AccountView(HomeActivity.this);
 
         viewPager.setAdapter(new PagerAdapter() {
             @Override
@@ -100,7 +100,7 @@ public class HomeActivity extends BaseActivity {
                         getResources().getDrawable(R.drawable.ic_third),
                         getResources().getColor(R.color.background_btn_color_pressed))
                         //.selectedIcon(getResources().getDrawable(R.drawable.ic_seventh))
-                        .title("Settings")
+                        .title("Account")
                         .badgeTitle("")
                         .build()
         );

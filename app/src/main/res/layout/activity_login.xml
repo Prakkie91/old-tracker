@@ -75,8 +75,7 @@
             android:layout_marginTop="@dimen/_5sdp"
             android:text="Login"
             android:textColor="#fff"
-            android:textSize="@dimen/_15sdp"
-            />
+            android:textSize="@dimen/_15sdp" />
 
         <LinearLayout
             android:layout_width="wrap_content"

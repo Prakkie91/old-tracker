@@ -43,13 +43,13 @@ public class TestView extends BaseView {
             Manifest.permission.ACCESS_NETWORK_STATE
     };
 
+    @Override
+    protected int getLayoutResID() {
+        return R.layout.item_test;
+    }
+
     public TestView(HomeActivity context, Bundle savedInstanceState) {
         super(context);
-
-        mContainerView = LayoutInflater.from(
-                mContext.getBaseContext()).inflate(R.layout.item_test, null, false);
-
-        ButterKnife.bind(this, mContainerView);
 
         mapView.onCreate(savedInstanceState);
         mapView.onResume();

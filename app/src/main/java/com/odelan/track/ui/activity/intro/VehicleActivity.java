@@ -24,12 +24,13 @@ public class VehicleActivity extends BaseActivity {
     EditText expireDateET;
 
     @Override
+    protected int getLayoutResID() {
+        return R.layout.activity_vehicle;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_vehicle);
-
-        mContext = this;
-        ButterKnife.bind(this);
     }
 
     @OnClick(R.id.nextBtn) public void onNext() {

@@ -14,8 +14,8 @@ public class TabAdapter {
     ArrayList<TextView> mViews = null;
     ArrayList<ViewGroup> mViewGroup = null;
     int mCount = 0;
-    int active_back_color = 0xFF2FABBA;
-    int nonactive_back_color = 0xFF40BECB;
+    int active_back_color = 0xFF0051ff;
+    int nonactive_back_color = 0xFF0080ff;
     int active_text_color = 0xFFFFFFFF;
     int nonactive_text_color = 0xFFCCCCCC;
     int selectedID = 0;

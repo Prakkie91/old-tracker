@@ -40,12 +40,13 @@ public class LocationActivity extends BaseActivity implements OnMapReadyCallback
     GoogleMap googleMap;
 
     @Override
+    protected int getLayoutResID() {
+        return R.layout.activity_location;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_location);
-
-        ButterKnife.bind(this);
-        mContext = this;
 
         SupportMapFragment fragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.googleMap);
         fragment.getMapAsync(this);
