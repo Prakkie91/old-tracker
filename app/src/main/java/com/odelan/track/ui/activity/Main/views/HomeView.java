@@ -224,5 +224,13 @@ public class HomeView extends BaseView {
             mContext.showToast("Recording Started.");
         }
     }
+
+    @OnClick(R.id.startBtn) public void onStart() {
+        mContext.showToast("Starting...");
+    }
+
+    @OnClick(R.id.stopBtn) public void onStop() {
+        mContext.showToast("Stopping...");
+    }
 }
 

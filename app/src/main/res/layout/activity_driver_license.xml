@@ -35,22 +35,38 @@
             android:hint="Driving License Number"
             android:inputType="number"/>
 
-        <EditText
-            android:id="@+id/expireDateET"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_40sdp"
+        <RelativeLayout
+            android:id="@+id/expireRL"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/_25sdp"
             android:layout_marginRight="@dimen/_25sdp"
             android:layout_below="@id/numberET"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:background="@drawable/input_background"
-            android:paddingLeft="@dimen/_15sdp"
-            android:paddingRight="@dimen/_15sdp"
-            android:textColor="#fff"
-            android:textColorHint="#fff"
-            android:textSize="@dimen/_15sdp"
-            android:hint="Driving License Expiry Date"
-            android:inputType="date"/>
+            android:layout_marginTop="@dimen/_5sdp">
+
+            <EditText
+                android:id="@+id/expireDateET"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:background="@drawable/input_background"
+                android:paddingLeft="@dimen/_15sdp"
+                android:paddingRight="@dimen/_15sdp"
+                android:textColor="#fff"
+                android:textColorHint="#fff"
+                android:textSize="@dimen/_15sdp"
+                android:hint="Driving License Expiry Date"
+                android:focusable="false"
+                android:inputType="date"/>
+
+            <ImageView
+                android:id="@+id/calendarIV"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:src="@drawable/ic_calendar"
+                android:layout_alignParentRight="true"
+                android:padding="@dimen/_7sdp"
+                android:layout_marginRight="@dimen/_5sdp"/>
+        </RelativeLayout>
 
         <EditText
             android:id="@+id/classET"
@@ -58,7 +74,7 @@
             android:layout_height="@dimen/_40sdp"
             android:layout_marginLeft="@dimen/_25sdp"
             android:layout_marginRight="@dimen/_25sdp"
-            android:layout_below="@id/expireDateET"
+            android:layout_below="@id/expireRL"
             android:layout_marginTop="@dimen/_5sdp"
             android:background="@drawable/input_background"
             android:paddingLeft="@dimen/_15sdp"
