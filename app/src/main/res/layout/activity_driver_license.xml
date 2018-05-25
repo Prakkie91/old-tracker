@@ -32,7 +32,7 @@
             android:textColor="#fff"
             android:textColorHint="#fff"
             android:textSize="@dimen/_15sdp"
-            android:hint="Driving License Number"
+            android:hint="@string/driver_license_number"
             android:inputType="number"/>
 
         <RelativeLayout
@@ -54,7 +54,7 @@
                 android:textColor="#fff"
                 android:textColorHint="#fff"
                 android:textSize="@dimen/_15sdp"
-                android:hint="Driving License Expiry Date"
+                android:hint="@string/driver_expire_date"
                 android:focusable="false"
                 android:inputType="date"/>
 
@@ -82,7 +82,7 @@
             android:textColor="#fff"
             android:textColorHint="#fff"
             android:textSize="@dimen/_15sdp"
-            android:hint="Driving License Class"
+            android:hint="@string/driver_class"
             />
 
         <Button
@@ -94,7 +94,7 @@
             android:layout_marginRight="@dimen/_25sdp"
             android:layout_below="@id/classET"
             android:layout_marginTop="@dimen/_20sdp"
-            android:text="Next"
+            android:text="@string/next"
             android:textColor="#fff"
             android:textSize="@dimen/_15sdp"
             />

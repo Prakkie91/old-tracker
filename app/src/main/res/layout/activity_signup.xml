@@ -33,7 +33,7 @@
             android:textColor="#fff"
             android:textColorHint="#fff"
             android:textSize="@dimen/_15sdp"
-            android:hint="Full name"
+            android:hint="@string/full_name"
             />
 
         <EditText
@@ -50,7 +50,7 @@
             android:textColor="#fff"
             android:textColorHint="#fff"
             android:textSize="@dimen/_15sdp"
-            android:hint="Hong Kong ID"
+            android:hint="@string/hk_id"
             />
 
         <EditText
@@ -67,7 +67,7 @@
             android:textColor="#fff"
             android:textColorHint="#fff"
             android:textSize="@dimen/_15sdp"
-            android:hint="Phone"
+            android:hint="@string/phone"
             android:inputType="phone"/>
 
         <EditText
@@ -84,14 +84,14 @@
             android:textColor="#fff"
             android:textColorHint="#fff"
             android:textSize="@dimen/_15sdp"
-            android:hint="Password"
+            android:hint="@string/password"
             android:inputType="textPassword" />
 
         <TextView
             android:id="@+id/termDescTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="By clicking Sign Up, you are agreeing to our"
+            android:text="@string/agree_desc"
             android:layout_centerHorizontal="true"
             android:textColor="@color/background_tv_color"
             android:textSize="@dimen/_11sdp"
@@ -101,7 +101,7 @@
             android:id="@+id/termTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Terms and Conditions"
+            android:text="@string/terms_desc"
             android:layout_centerHorizontal="true"
             android:textColor="#fff"
             android:textSize="@dimen/_11sdp"
@@ -117,7 +117,7 @@
             android:layout_marginRight="@dimen/_25sdp"
             android:layout_below="@id/termTV"
             android:layout_marginTop="@dimen/_5sdp"
-            android:text="Sign Up"
+            android:text="@string/signup"
             android:textColor="#fff"
             android:textSize="@dimen/_15sdp"
             />
@@ -133,7 +133,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Do not have an account already?"
+                android:text="@string/have_account"
                 android:textColor="@color/txt_color"
                 android:textSize="@dimen/_12sdp"/>
 
@@ -141,7 +141,7 @@
                 android:id="@+id/loginTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Log in"
+                android:text="@string/login"
                 android:textColor="#fff"
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:textSize="@dimen/_13sdp"

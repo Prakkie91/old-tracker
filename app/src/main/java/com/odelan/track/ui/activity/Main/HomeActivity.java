@@ -82,7 +82,7 @@ public class HomeActivity extends BaseActivity {
                         getResources().getDrawable(R.drawable.ic_first),
                         getResources().getColor(R.color.background_btn_color_pressed))
                         //.selectedIcon(getResources().getDrawable(R.drawable.ic_sixth))
-                        .title("Home")
+                        .title(getString(R.string.home))
                         .badgeTitle("")
                         .build()
         );
@@ -91,7 +91,7 @@ public class HomeActivity extends BaseActivity {
                         getResources().getDrawable(R.drawable.ic_second),
                         getResources().getColor(R.color.background_btn_color_pressed))
 //                        .selectedIcon(getResources().getDrawable(R.drawable.ic_eighth))
-                        .title("Orders")
+                        .title(getString(R.string.orders))
                         .badgeTitle("")
                         .build()
         );
@@ -100,7 +100,7 @@ public class HomeActivity extends BaseActivity {
                         getResources().getDrawable(R.drawable.ic_third),
                         getResources().getColor(R.color.background_btn_color_pressed))
                         //.selectedIcon(getResources().getDrawable(R.drawable.ic_seventh))
-                        .title("Account")
+                        .title(getString(R.string.account))
                         .badgeTitle("")
                         .build()
         );

@@ -35,6 +35,6 @@ public class CurrentOrderDetailActivity extends BaseActivity {
     }
 
     @OnClick (R.id.cancelBtn) public void onCancel() {
-        showToast("Cancelled");
+        showToast(getString(R.string.cancelled));
     }
 }

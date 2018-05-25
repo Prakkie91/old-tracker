@@ -34,6 +34,6 @@ public class OrderDetailActivity extends BaseActivity {
     }
 
     @OnClick (R.id.acceptBtn) public void onAccept() {
-        showToast("Accepted");
+        showToast(getString(R.string.accepted));
     }
 }

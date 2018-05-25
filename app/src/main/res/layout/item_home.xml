@@ -43,7 +43,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="HOME"
+                android:text="@string/home"
                 android:textColor="@android:color/black"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -70,7 +70,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Campaign"
+                android:text="@string/campaign"
                 android:layout_gravity="center_horizontal"
                 android:padding="@dimen/_5sdp"
                 android:textSize="@dimen/_14sdp" />
@@ -93,7 +93,7 @@
                         android:background="@drawable/blue_btn_background"
                         android:layout_marginLeft="@dimen/_25sdp"
                         android:layout_marginRight="@dimen/_25sdp"
-                        android:text="Start"
+                        android:text="@string/start"
                         android:textColor="#fff"
                         android:textSize="@dimen/_15sdp"
                         />
@@ -111,7 +111,7 @@
                         android:background="@drawable/blue_btn_background"
                         android:layout_marginLeft="@dimen/_25sdp"
                         android:layout_marginRight="@dimen/_25sdp"
-                        android:text="Stop"
+                        android:text="@string/stop"
                         android:textColor="#fff"
                         android:textSize="@dimen/_15sdp"
                         />

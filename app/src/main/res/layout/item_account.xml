@@ -34,7 +34,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="Settings"
+                android:text="@string/account"
                 android:textColor="@android:color/black"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -67,7 +67,7 @@
                     android:layout_weight="1"
                     android:clickable="true"
                     android:gravity="center"
-                    android:text="Personal Info"
+                    android:text="@string/personal_info"
                     android:textSize="@dimen/_16sdp"/>
 
                 <TextView
@@ -80,7 +80,7 @@
                     android:layout_marginTop="@dimen/_5sdp"
                     android:clickable="true"
                     android:gravity="center"
-                    android:text="Statistics"
+                    android:text="@string/statistics"
                     android:textSize="@dimen/_16sdp"/>
             </LinearLayout>
 
@@ -107,7 +107,7 @@
                             android:layout_width="0dp"
                             android:layout_weight="1"
                             android:layout_height="wrap_content"
-                            android:text="Fullname: "
+                            android:text="@string/full_name_comma"
                             android:textSize="@dimen/_14sdp"/>
 
                         <EditText
@@ -127,7 +127,7 @@
                             android:layout_width="0dp"
                             android:layout_weight="1"
                             android:layout_height="wrap_content"
-                            android:text="Date of Birth: "
+                            android:text="@string/date_birth_comma"
                             android:textSize="@dimen/_14sdp"/>
 
                         <EditText
@@ -147,7 +147,7 @@
                             android:layout_width="0dp"
                             android:layout_weight="1"
                             android:layout_height="wrap_content"
-                            android:text="Phone number: "
+                            android:text="@string/phone_number_comma"
                             android:textSize="@dimen/_14sdp"/>
 
                         <EditText
@@ -163,7 +163,7 @@
                         android:background="@drawable/blue_btn_background"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="@dimen/_20sdp"
-                        android:text="Save"
+                        android:text="@string/save"
                         android:textColor="@android:color/white"
                         android:textSize="@dimen/_15sdp"/>
                 </LinearLayout>
@@ -185,7 +185,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Ad Completed: "
+                            android:text="@string/ad_completed_comma"
                             android:textSize="@dimen/_14sdp"/>
 
                         <TextView
@@ -204,7 +204,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Total Amount Earned: "
+                            android:text="@string/total_amount_earned_comma"
                             android:textSize="@dimen/_14sdp"/>
 
                         <TextView

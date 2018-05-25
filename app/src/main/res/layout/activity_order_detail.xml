@@ -43,7 +43,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="Order #1"
                 android:textColor="@android:color/black"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -71,13 +70,13 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Ad region: "
+                    android:text="@string/ad_region_comma"
                     android:textSize="@dimen/_14sdp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Tsim Sha Thai"
+                    android:text="@string/sample_order_name"
                     android:textSize="@dimen/_14sdp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -91,7 +90,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Ad Type: "
+                    android:text="@string/ad_type"
                     android:textSize="@dimen/_14sdp" />
 
                 <TextView
@@ -110,7 +109,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Ad size: "
+                    android:text="@string/ad_size"
                     android:textSize="@dimen/_14sdp" />
 
                 <TextView
@@ -129,7 +128,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Ad period: "
+                    android:text="@string/ad_period"
                     android:textSize="@dimen/_14sdp" />
 
                 <TextView
@@ -148,7 +147,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Amount: "
+                    android:text="@string/amount"
                     android:textSize="@dimen/_14sdp"/>
 
                 <TextView
@@ -167,7 +166,7 @@
                 android:layout_marginLeft="@dimen/_25sdp"
                 android:layout_marginRight="@dimen/_25sdp"
                 android:layout_marginTop="@dimen/_20sdp"
-                android:text="Accept"
+                android:text="@string/accept"
                 android:textColor="#fff"
                 android:textSize="@dimen/_15sdp" />
         </LinearLayout>

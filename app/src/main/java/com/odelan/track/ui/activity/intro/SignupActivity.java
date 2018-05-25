@@ -38,7 +38,6 @@ public class SignupActivity extends BaseActivity {
     }
 
     @OnClick(R.id.signupBtn) public void onSignup() {
-        showToast("Sign up");
         startActivity(new Intent(mContext, DriverLicenseActivity.class));
     }
 

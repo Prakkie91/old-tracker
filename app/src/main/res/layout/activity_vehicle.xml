@@ -32,7 +32,7 @@
             android:textColor="#fff"
             android:textColorHint="#fff"
             android:textSize="@dimen/_15sdp"
-            android:hint="Vehicle Type"
+            android:hint="@string/vehicle_type"
             />
 
         <EditText
@@ -49,7 +49,7 @@
             android:textColor="#fff"
             android:textColorHint="#fff"
             android:textSize="@dimen/_15sdp"
-            android:hint="Vehicle Plate Number"
+            android:hint="@string/vehicle_number"
             android:inputType="number"/>
 
         <RelativeLayout
@@ -71,7 +71,7 @@
                 android:textColor="#fff"
                 android:textColorHint="#fff"
                 android:textSize="@dimen/_15sdp"
-                android:hint="Plate Number Expiry Date"
+                android:hint="@string/vehicle_expire_date"
                 android:focusable="false"
                 android:inputType="date"/>
 
@@ -84,20 +84,6 @@
                 android:padding="@dimen/_7sdp"
                 android:layout_marginRight="@dimen/_5sdp"/>
         </RelativeLayout>
-        <!--<EditText
-            android:id="@+id/expireDateET"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_40sdp"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:background="@drawable/input_background"
-            android:paddingLeft="@dimen/_15sdp"
-            android:paddingRight="@dimen/_15sdp"
-            android:textColor="#fff"
-            android:textColorHint="#fff"
-            android:textSize="@dimen/_15sdp"
-            android:hint="Plate Number Expiry Date"
-            android:inputType="date"
-            />-->
 
         <Button
             android:id="@+id/nextBtn"
@@ -108,7 +94,7 @@
             android:layout_marginRight="@dimen/_25sdp"
             android:layout_below="@id/expireRL"
             android:layout_marginTop="@dimen/_20sdp"
-            android:text="Next"
+            android:text="@string/next"
             android:textColor="#fff"
             android:textSize="@dimen/_15sdp"
             />

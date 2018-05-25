@@ -44,7 +44,7 @@
             android:textColor="#fff"
             android:textColorHint="#fff"
             android:textSize="@dimen/_15sdp"
-            android:hint="Email"
+            android:hint="@string/email"
             android:inputType="textEmailAddress"/>
 
         <EditText
@@ -61,7 +61,7 @@
             android:textColor="#fff"
             android:textColorHint="#fff"
             android:textSize="@dimen/_15sdp"
-            android:hint="Password"
+            android:hint="@string/password"
             android:inputType="textPassword" />
 
         <Button
@@ -73,7 +73,7 @@
             android:layout_marginRight="@dimen/_25sdp"
             android:layout_below="@id/passwordET"
             android:layout_marginTop="@dimen/_5sdp"
-            android:text="Login"
+            android:text="@string/login"
             android:textColor="#fff"
             android:textSize="@dimen/_15sdp" />
 
@@ -88,7 +88,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Do not have an account yet?"
+                android:text="@string/do_not_have_account"
                 android:textColor="@color/txt_color"
                 android:textSize="@dimen/_12sdp"/>
 
@@ -96,7 +96,7 @@
                 android:id="@+id/signupTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sign Up"
+                android:text="@string/signup"
                 android:textColor="#fff"
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:textSize="@dimen/_13sdp"

@@ -114,7 +114,7 @@ public class HomeView extends BaseView {
 
         Order item = new Order();
         item.oid = "1";
-        item.title = "Order1";
+        item.title = mContext.getString(R.string.order)+1;
         item.lat = MyApplication.g_latitude - 0.1;
         item.lng = MyApplication.g_longitude - 0.1;
         item.radius = 5000;
@@ -122,7 +122,7 @@ public class HomeView extends BaseView {
 
         item = new Order();
         item.oid = "2";
-        item.title = "Order2";
+        item.title = mContext.getString(R.string.order)+2;
         item.lat = MyApplication.g_latitude -0.1515;
         item.lng = MyApplication.g_longitude + 0.1212;
         item.radius = 10000;
@@ -130,7 +130,7 @@ public class HomeView extends BaseView {
 
         item = new Order();
         item.oid = "3";
-        item.title = "Order3";
+        item.title = mContext.getString(R.string.order)+3;
         item.lat = MyApplication.g_latitude + 0.3;
         item.lng = MyApplication.g_longitude - 0.3;
         item.radius = 8000;
@@ -180,9 +180,9 @@ public class HomeView extends BaseView {
 
     private void showPermissionError() {
         new MaterialDialog.Builder(mContext)
-                .title("Warning")
-                .content("Permissions were denied. In order to allow permission, first you have to turn off screen overlay from Settings > Apps.")
-                .positiveText("OK")
+                .title(mContext.getString(R.string.warning))
+                .content(mContext.getString(R.string.permission_denied))
+                .positiveText(mContext.getString(R.string.ok))
                 .show();
     }
 
@@ -217,20 +217,20 @@ public class HomeView extends BaseView {
         if (isRecording) {
             isRecording = false;
             recordIV.setImageResource(R.drawable.ic_record_stoped);
-            mContext.showToast("Recording Stopped.");
+            mContext.showToast(mContext.getString(R.string.stopped));
         } else {
             isRecording = true;
             recordIV.setImageResource(R.drawable.ic_record_started);
-            mContext.showToast("Recording Started.");
+            mContext.showToast(mContext.getString(R.string.recording));
         }
     }
 
     @OnClick(R.id.startBtn) public void onStart() {
-        mContext.showToast("Starting...");
+        mContext.showToast(mContext.getString(R.string.recording));
     }
 
     @OnClick(R.id.stopBtn) public void onStop() {
-        mContext.showToast("Stopping...");
+        mContext.showToast(mContext.getString(R.string.stopped));
     }
 }
 

@@ -51,7 +51,7 @@ public class OrdersView extends BaseView {
 
         Order item = new Order();
         item.oid = "1";
-        item.title = "Order1";
+        item.title = mContext.getString(R.string.order)+1;
         item.lat = MyApplication.g_latitude - 0.1;
         item.lng = MyApplication.g_longitude - 0.1;
         item.radius = 5000;
@@ -60,7 +60,7 @@ public class OrdersView extends BaseView {
 
         item = new Order();
         item.oid = "2";
-        item.title = "Order2";
+        item.title = mContext.getString(R.string.order)+2;
         item.lat = MyApplication.g_latitude -0.1515;
         item.lng = MyApplication.g_longitude + 0.1212;
         item.radius = 10000;
@@ -69,7 +69,7 @@ public class OrdersView extends BaseView {
 
         item = new Order();
         item.oid = "3";
-        item.title = "Order3";
+        item.title = mContext.getString(R.string.order)+3;
         item.lat = MyApplication.g_latitude + 0.3;
         item.lng = MyApplication.g_longitude - 0.3;
         item.radius = 8000;
