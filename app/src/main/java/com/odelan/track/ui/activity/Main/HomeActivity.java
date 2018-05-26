@@ -25,7 +25,7 @@ public class HomeActivity extends BaseActivity {
 
     HomeView homeView;
     OrdersView ordersView;
-    AccountView settingsView;
+    AccountView accountView;
 
     @Override
     protected int getLayoutResID() {
@@ -33,16 +33,16 @@ public class HomeActivity extends BaseActivity {
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         initUI(savedInstanceState);
     }
 
-    private void initUI(Bundle savedInstanceState) {
+    private void initUI(final Bundle savedInstanceState) {
         homeView = new HomeView(HomeActivity.this, savedInstanceState);
         ordersView = new OrdersView(HomeActivity.this);
-        settingsView = new AccountView(HomeActivity.this);
+        accountView = new AccountView(HomeActivity.this);
 
         viewPager.setAdapter(new PagerAdapter() {
             @Override
@@ -68,7 +68,7 @@ public class HomeActivity extends BaseActivity {
                 } else if (position == 1) {
                     view = ordersView.mContainerView;
                 } else if (position == 2) {
-                    view = settingsView.mContainerView;
+                    view = accountView.mContainerView;
                 }
 
                 container.addView(view);

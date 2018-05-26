@@ -1,15 +1,17 @@
 package com.odelan.track.ui.activity.intro;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.odelan.track.R;
 import com.odelan.track.ui.activity.Main.HomeActivity;
 import com.odelan.track.ui.base.BaseActivity;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class LoginActivity extends BaseActivity {
@@ -20,21 +22,50 @@ public class LoginActivity extends BaseActivity {
     @BindView(R.id.passwordET)
     EditText passworkET;
 
+    @BindView(R.id.zhTV)
+    TextView zhTV;
+
+    @BindView(R.id.enTV)
+    TextView enTV;
+
     @Override
     protected int getLayoutResID() {
         return R.layout.activity_login;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (getCurrentLanguage().getLanguage().equals("zh")) {
+            zhTV.setTextColor(getResources().getColor(R.color.txt_gray_color));
+            enTV.setTextColor(getResources().getColor(R.color.white));
+        } else {
+            zhTV.setTextColor(getResources().getColor(R.color.white));
+            enTV.setTextColor(getResources().getColor(R.color.txt_gray_color));
+        }
     }
 
-    @OnClick (R.id.signupTV) public void onSignup() {
+    @OnClick(R.id.signupTV)
+    public void onSignup() {
         startActivity(new Intent(mContext, SignupActivity.class));
     }
 
-    @OnClick (R.id.loginBtn) public void onLogin() {
+    @OnClick(R.id.loginBtn)
+    public void onLogin() {
         startActivity(new Intent(mContext, HomeActivity.class));
+    }
+
+    @OnClick(R.id.zhTV) public void onZhTV() {
+        zhTV.setTextColor(getResources().getColor(R.color.txt_gray_color));
+        enTV.setTextColor(getResources().getColor(R.color.white));
+        setLanguage("zh");
+    }
+
+    @OnClick(R.id.enTV) public void onEnTV() {
+        zhTV.setTextColor(getResources().getColor(R.color.white));
+        enTV.setTextColor(getResources().getColor(R.color.txt_gray_color));
+        setLanguage("en");
     }
 }

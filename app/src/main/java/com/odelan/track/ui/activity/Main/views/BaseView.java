@@ -2,6 +2,7 @@ package com.odelan.track.ui.activity.Main.views;
 
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.odelan.track.R;
 import com.odelan.track.ui.base.BaseActivity;
@@ -24,5 +25,6 @@ public abstract class BaseView {
                 mContext.getBaseContext()).inflate(getLayoutResID(), null, false);
 
         ButterKnife.bind(this, mContainerView);
+
     }
 }

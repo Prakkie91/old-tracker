@@ -26,7 +26,7 @@ public class IntroActivity extends BaseActivity {
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         video = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.hello);

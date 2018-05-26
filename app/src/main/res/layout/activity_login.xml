@@ -80,6 +80,40 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_above="@+id/bottomLL"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/_15sdp"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/zhTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="繁中"
+                android:textColor="@color/txt_gray_color"
+                android:textSize="@dimen/_15sdp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:text=" / "
+                android:textSize="@dimen/_15sdp"/>
+
+            <TextView
+                android:id="@+id/enTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ENG"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/_15sdp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/bottomLL"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="@dimen/_5sdp"

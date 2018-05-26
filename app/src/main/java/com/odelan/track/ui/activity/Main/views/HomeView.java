@@ -7,8 +7,6 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.view.LayoutInflater;
-import android.widget.ImageView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.google.android.gms.maps.GoogleMap;
@@ -20,7 +18,6 @@ import com.odelan.track.MyApplication;
 import com.odelan.track.R;
 import com.odelan.track.data.model.Order;
 import com.odelan.track.ui.activity.Main.HomeActivity;
-import com.odelan.track.ui.activity.Main.LocationActivity;
 import com.odelan.track.ui.activity.Main.OrderDetailActivity;
 import com.odelan.track.utils.GPSTracker;
 import com.odelan.track.utils.GoogleMapHelper;
@@ -29,7 +26,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.google.android.gms.maps.CameraUpdateFactory.newLatLngBounds;
@@ -38,9 +34,6 @@ public class HomeView extends BaseView {
 
     @BindView(R.id.mapView)
     MapView mapView;
-
-    @BindView(R.id.recordIV)
-    ImageView recordIV;
 
     private GoogleMap googleMap;
     private GoogleMapHelper googleMapHelper;
@@ -61,7 +54,7 @@ public class HomeView extends BaseView {
         return R.layout.item_home;
     }
 
-    public HomeView(HomeActivity context, Bundle savedInstanceState) {
+    public HomeView(HomeActivity context,  Bundle savedInstanceState) {
         super(context);
 
         mapView.onCreate(savedInstanceState);
@@ -89,8 +82,6 @@ public class HomeView extends BaseView {
                 }
             }
         });
-
-        recordIV.setImageResource(R.drawable.ic_record_stoped);
     }
 
     @SuppressLint("MissingPermission")
@@ -211,18 +202,6 @@ public class HomeView extends BaseView {
         }
 
         return false;
-    }
-
-    @OnClick(R.id.recordIV) public void onMap() {
-        if (isRecording) {
-            isRecording = false;
-            recordIV.setImageResource(R.drawable.ic_record_stoped);
-            mContext.showToast(mContext.getString(R.string.stopped));
-        } else {
-            isRecording = true;
-            recordIV.setImageResource(R.drawable.ic_record_started);
-            mContext.showToast(mContext.getString(R.string.recording));
-        }
     }
 
     @OnClick(R.id.startBtn) public void onStart() {

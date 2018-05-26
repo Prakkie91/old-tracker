@@ -24,7 +24,7 @@ public class CurrentOrderDetailActivity extends BaseActivity {
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         titleTV.setText(mOrder.title);

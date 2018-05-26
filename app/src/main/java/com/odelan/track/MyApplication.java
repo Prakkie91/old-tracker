@@ -4,13 +4,19 @@ import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
+import android.util.DisplayMetrics;
 
+import com.akexorcist.localizationactivity.core.LocalizationApplicationDelegate;
 import com.androidnetworking.AndroidNetworking;
+import com.odelan.track.utils.Common;
 import com.odelan.track.utils.GPSTracker;
 
 import java.util.List;
+import java.util.Locale;
 
 
 /**
@@ -24,11 +30,29 @@ public class MyApplication extends Application {
 
     public static GPSTracker g_GPSTracker = null;
 
+    LocalizationApplicationDelegate localizationDelegate = new LocalizationApplicationDelegate(this);
+
     @Override
     public void onCreate() {
         super.onCreate();
 
         AndroidNetworking.initialize(getApplicationContext());
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(localizationDelegate.attachBaseContext(base));
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        localizationDelegate.onConfigurationChanged(this);
+    }
+
+    @Override
+    public Context getApplicationContext() {
+        return localizationDelegate.getApplicationContext(super.getApplicationContext());
     }
 
     public static boolean isAppForeground(Context context) {

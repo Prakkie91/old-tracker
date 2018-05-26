@@ -35,7 +35,7 @@ public class VehicleActivity extends BaseActivity {
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         dateTimeUtils = new DateTimeUtils("dd/MM/yyyy");
