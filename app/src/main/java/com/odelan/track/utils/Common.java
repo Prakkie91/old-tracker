@@ -3,9 +3,11 @@ package com.odelan.track.utils;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Point;
@@ -62,6 +64,24 @@ public class Common {
         SharedPreferences.Editor editor = pref.edit();
         editor.putString(key, username);
         editor.commit();
+    }
+
+    public void setLanguage(Activity con, String language, Class activityClass){
+
+        //setting new configuration
+        Locale locale = new Locale(language);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        con.getApplicationContext().getResources().updateConfiguration(config, null);
+
+        //store current language in prefrence
+        saveInfoWithKeyValue(con,"language", language);
+
+        //With new configuration start activity again
+        Intent intent = new Intent(con.getApplicationContext(), activityClass);
+        con.startActivity(intent);
+        con.finish();
     }
 
     public static Bitmap getBitmapFromImageView(ImageView iv) {

@@ -38,7 +38,7 @@ public class LoginActivity extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (getCurrentLanguage().getLanguage().equals("zh")) {
+        if (multiLanguageHelper.getCurrentLanguage() == null || multiLanguageHelper.getCurrentLanguage().equals(multiLanguageHelper.LANG_VAL_CHINA)) {
             zhTV.setTextColor(getResources().getColor(R.color.txt_gray_color));
             enTV.setTextColor(getResources().getColor(R.color.white));
         } else {
@@ -60,12 +60,12 @@ public class LoginActivity extends BaseActivity {
     @OnClick(R.id.zhTV) public void onZhTV() {
         zhTV.setTextColor(getResources().getColor(R.color.txt_gray_color));
         enTV.setTextColor(getResources().getColor(R.color.white));
-        setLanguage("zh");
+        setLanguage(multiLanguageHelper.LANG_VAL_CHINA);
     }
 
     @OnClick(R.id.enTV) public void onEnTV() {
         zhTV.setTextColor(getResources().getColor(R.color.white));
         enTV.setTextColor(getResources().getColor(R.color.txt_gray_color));
-        setLanguage("en");
+        setLanguage(multiLanguageHelper.LANG_VAL_ENGLISH);
     }
 }
