@@ -28,7 +28,7 @@
     <string name="next">下一步</string>
 
     <!-- VehicleActivity -->
-    <string name="vehicle_type">車輛類型</string>
+    <string name="vehicle_type">車種</string>
     <string name="vehicle_number">車牌號</string>
     <string name="vehicle_expire_date">車牌號到期日</string>
     <string name="van">仔</string>

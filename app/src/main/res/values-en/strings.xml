@@ -28,7 +28,7 @@
     <string name="next">Next</string>
 
     <!-- VehicleActivity -->
-    <string name="vehicle_type">Vehicle Type</string>
+    <string name="vehicle_type">Car Type</string>
     <string name="vehicle_number">Vehicle Plate Number</string>
     <string name="vehicle_expire_date">Plate Number Expiry Date</string>
     <string name="van">Van</string>

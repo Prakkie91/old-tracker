@@ -1,5 +1,6 @@
 package com.odelan.track.ui.activity.intro;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.DatePicker;
@@ -46,7 +47,7 @@ public class DriverLicenseActivity extends BaseActivity {
 
     @OnClick(R.id.calendarIV) public void onCalender() {
         Calendar now = Calendar.getInstance();
-        new android.app.DatePickerDialog(
+        DatePickerDialog mDatePicker = new android.app.DatePickerDialog (
                 this,
                 new android.app.DatePickerDialog.OnDateSetListener() {
                     @Override
@@ -65,6 +66,9 @@ public class DriverLicenseActivity extends BaseActivity {
                 now.get(Calendar.YEAR),
                 now.get(Calendar.MONTH),
                 now.get(Calendar.DAY_OF_MONTH)
-        ).show();
+        );
+
+        mDatePicker.getDatePicker().setMinDate(System.currentTimeMillis()-10000);
+        mDatePicker.show();
     }
 }

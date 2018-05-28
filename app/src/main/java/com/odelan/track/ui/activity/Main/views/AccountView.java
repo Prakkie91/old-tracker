@@ -1,5 +1,6 @@
 package com.odelan.track.ui.activity.Main.views;
 
+import android.app.DatePickerDialog;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -13,6 +14,7 @@ import com.odelan.track.utils.TabAdapter;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -53,8 +55,14 @@ public class AccountView extends BaseView {
     }
 
     @OnClick(R.id.birthDayET) public void onBirthDay() {
+        // at least 18 years old
+
         Calendar now = Calendar.getInstance();
-        new android.app.DatePickerDialog(
+        now.setTime(new Date());
+        now.add(Calendar.YEAR, -18);
+        Date newdate = now.getTime();
+
+        DatePickerDialog mDatePicker = new android.app.DatePickerDialog(
                 mContext,
                 new android.app.DatePickerDialog.OnDateSetListener() {
                     @Override
@@ -73,7 +81,10 @@ public class AccountView extends BaseView {
                 now.get(Calendar.YEAR),
                 now.get(Calendar.MONTH),
                 now.get(Calendar.DAY_OF_MONTH)
-        ).show();
+        );
+
+        mDatePicker.getDatePicker().setMaxDate(newdate.getTime());
+        mDatePicker.show();
     }
 
     @OnClick(R.id.firstTV) public void onFristTabClick() {

@@ -1,5 +1,7 @@
 package com.odelan.track.ui.activity.intro;
 
+import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +15,7 @@ import android.widget.Spinner;
 import com.odelan.track.R;
 import com.odelan.track.ui.activity.Main.HomeActivity;
 import com.odelan.track.ui.base.BaseActivity;
+import com.odelan.track.utils.Common;
 import com.odelan.track.utils.DateTimeUtils;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
@@ -22,7 +25,6 @@ import java.util.Calendar;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class VehicleActivity extends BaseActivity {
@@ -70,10 +72,26 @@ public class VehicleActivity extends BaseActivity {
         vtypes.add(getString(R.string.tour_bus));
         vtypes.add(getString(R.string.private_car));
 
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, R.layout.spinner_item, vtypes);
-
+        SpinnerAdapter dataAdapter = new SpinnerAdapter(this, R.layout.spinner_item);
+        dataAdapter.addAll(vtypes);
+        dataAdapter.add(getString(R.string.vehicle_type)); // for hint text
         spinner.setAdapter(dataAdapter);
-        spinner.setSelection(0);
+        spinner.setSelection(dataAdapter.getCount());
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if(spinner.getSelectedItem() == getString(R.string.vehicle_type)) {
+
+                } else {
+
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
     }
 
     @OnClick(R.id.nextBtn) public void onNext() {
@@ -82,7 +100,7 @@ public class VehicleActivity extends BaseActivity {
 
     @OnClick(R.id.calendarIV) public void onCalender() {
         Calendar now = Calendar.getInstance();
-        new android.app.DatePickerDialog(
+        DatePickerDialog mDatePicker = new android.app.DatePickerDialog (
                 this,
                 new android.app.DatePickerDialog.OnDateSetListener() {
                     @Override
@@ -101,7 +119,10 @@ public class VehicleActivity extends BaseActivity {
                 now.get(Calendar.YEAR),
                 now.get(Calendar.MONTH),
                 now.get(Calendar.DAY_OF_MONTH)
-        ).show();
+        );
+
+        mDatePicker.getDatePicker().setMinDate(System.currentTimeMillis()-10000);
+        mDatePicker.show();
     }
 
     @OnClick(R.id.vehicleIV) public void onVehicleIV() {
@@ -135,6 +156,22 @@ public class VehicleActivity extends BaseActivity {
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 showToast("Cropping failed: " + result.getError());
             }
+        }
+    }
+
+    class SpinnerAdapter extends ArrayAdapter<String> {
+        public SpinnerAdapter(Context context, int textViewResourceId) {
+            super(context, textViewResourceId);
+            // TODO Auto-generated constructor stub
+        }
+
+        @Override
+        public int getCount() {
+
+            // TODO Auto-generated method stub
+            int count = super.getCount();
+
+            return count>0 ? count-1 : count ;
         }
     }
 }

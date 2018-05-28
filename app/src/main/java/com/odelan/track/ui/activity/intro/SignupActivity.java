@@ -1,5 +1,6 @@
 package com.odelan.track.ui.activity.intro;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.DatePicker;
@@ -11,6 +12,7 @@ import com.odelan.track.utils.DateTimeUtils;
 
 import java.sql.Driver;
 import java.util.Calendar;
+import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -56,8 +58,14 @@ public class SignupActivity extends BaseActivity {
     }
 
     @OnClick(R.id.calendarIV) public void onCalender() {
+        // at least 18 years old
+
         Calendar now = Calendar.getInstance();
-        new android.app.DatePickerDialog(
+        now.setTime(new Date());
+        now.add(Calendar.YEAR, -18);
+        Date newdate = now.getTime();
+
+        DatePickerDialog mDatePicker = new android.app.DatePickerDialog(
                 this,
                 new android.app.DatePickerDialog.OnDateSetListener() {
                     @Override
@@ -76,6 +84,9 @@ public class SignupActivity extends BaseActivity {
                 now.get(Calendar.YEAR),
                 now.get(Calendar.MONTH),
                 now.get(Calendar.DAY_OF_MONTH)
-        ).show();
+        );
+
+        mDatePicker.getDatePicker().setMaxDate(newdate.getTime());
+        mDatePicker.show();
     }
 }
