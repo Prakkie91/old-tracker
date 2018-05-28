@@ -54,8 +54,6 @@ public class HomeView extends BaseView {
 
     public List<Order> mData = new ArrayList<>();
 
-    boolean isRecording = false;
-
     @Override
     protected int getLayoutResID() {
         return R.layout.item_home;

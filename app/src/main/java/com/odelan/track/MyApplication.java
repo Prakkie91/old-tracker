@@ -5,18 +5,14 @@ import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
 import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
-import android.util.DisplayMetrics;
 
 import com.akexorcist.localizationactivity.core.LocalizationApplicationDelegate;
 import com.androidnetworking.AndroidNetworking;
-import com.odelan.track.utils.Common;
 import com.odelan.track.utils.GPSTracker;
 
 import java.util.List;
-import java.util.Locale;
 
 
 /**
