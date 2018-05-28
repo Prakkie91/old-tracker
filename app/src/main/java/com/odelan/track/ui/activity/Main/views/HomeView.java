@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.widget.Button;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.google.android.gms.maps.GoogleMap;
@@ -34,6 +35,12 @@ public class HomeView extends BaseView {
 
     @BindView(R.id.mapView)
     MapView mapView;
+
+    @BindView(R.id.startBtn)
+    Button startBtn;
+
+    @BindView(R.id.stopBtn)
+    Button stopBtn;
 
     private GoogleMap googleMap;
     private GoogleMapHelper googleMapHelper;
@@ -106,25 +113,31 @@ public class HomeView extends BaseView {
         Order item = new Order();
         item.oid = "1";
         item.title = mContext.getString(R.string.order)+1;
-        item.lat = MyApplication.g_latitude - 0.1;
-        item.lng = MyApplication.g_longitude - 0.1;
-        item.radius = 5000;
+        //item.lat = MyApplication.g_latitude - 0.1;
+        //item.lng = MyApplication.g_longitude - 0.1;
+        item.lat = 22.2982372;
+        item.lng = 114.1695309;
+        item.radius = 100;
         mData.add(item);
 
         item = new Order();
         item.oid = "2";
         item.title = mContext.getString(R.string.order)+2;
-        item.lat = MyApplication.g_latitude -0.1515;
-        item.lng = MyApplication.g_longitude + 0.1212;
-        item.radius = 10000;
+        //item.lat = MyApplication.g_latitude -0.1515;
+        //item.lng = MyApplication.g_longitude + 0.1212;
+        item.lat = 22.3193429;
+        item.lng = 114.1589395;
+        item.radius = 50;
         mData.add(item);
 
         item = new Order();
         item.oid = "3";
         item.title = mContext.getString(R.string.order)+3;
-        item.lat = MyApplication.g_latitude + 0.3;
-        item.lng = MyApplication.g_longitude - 0.3;
-        item.radius = 8000;
+        //item.lat = MyApplication.g_latitude + 0.3;
+        //item.lng = MyApplication.g_longitude - 0.3;
+        item.lat = 22.2825059;
+        item.lng = 114.1830503;
+        item.radius = 80;
         mData.add(item);
     }
 
@@ -144,7 +157,7 @@ public class HomeView extends BaseView {
         googleMapHelper.addMaker(myLocation);
 
         List<LatLng>bounds = new ArrayList<>();
-        bounds.add(myLocation);
+        //bounds.add(myLocation);
 
         for (Order item : mData) {
             LatLng latLng = new LatLng(item.lat, item.lng);
@@ -153,9 +166,11 @@ public class HomeView extends BaseView {
             Circle circle = googleMapHelper.addCircle(latLng, item.radius);
             circle.setTag(item.oid);
             circle.setClickable(true);
+            googleMapHelper.addMaker(latLng);
         }
 
-        googleMapHelper.moveCameraPoint(myLocation, 9);
+        //googleMapHelper.moveCameraPoint(myLocation, 9);
+        googleMapHelper.moveCameraBounds(bounds, 50);
     }
 
     private boolean hasPermissionsGranted (String[] permissions) {
@@ -205,10 +220,14 @@ public class HomeView extends BaseView {
     }
 
     @OnClick(R.id.startBtn) public void onStart() {
+        startBtn.setBackground(mContext.getResources().getDrawable(R.drawable.green_btn_background));
+        stopBtn.setBackground(mContext.getResources().getDrawable(R.drawable.blue_btn_background));
         mContext.showToast(mContext.getString(R.string.recording));
     }
 
     @OnClick(R.id.stopBtn) public void onStop() {
+        startBtn.setBackground(mContext.getResources().getDrawable(R.drawable.blue_btn_background));
+        stopBtn.setBackground(mContext.getResources().getDrawable(R.drawable.green_btn_background));
         mContext.showToast(mContext.getString(R.string.stopped));
     }
 }

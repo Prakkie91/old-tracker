@@ -12,7 +12,10 @@
 
     <!-- SignupActivity -->
     <string name="full_name">名字</string>
+    <string name="first_name">名字</string>
+    <string name="last_name">姓</string>
     <string name="hk_id">香港 ID</string>
+    <string name="date_of_birth">出生日期</string>
     <string name="phone">電話號碼</string>
     <string name="agree_desc">通過點擊註冊, 您同意我們的</string>
     <string name="terms_desc">條款及條件</string>
@@ -28,6 +31,14 @@
     <string name="vehicle_type">車輛類型</string>
     <string name="vehicle_number">車牌號</string>
     <string name="vehicle_expire_date">車牌號到期日</string>
+    <string name="van">仔</string>
+    <string name="five_truck">5.5 噸密斗</string>
+    <string name="nine_truck">9 噸密斗</string>
+    <string name="tour_bus">旅遊巴</string>
+    <string name="private_car">私家車</string>
+    <string name="photo_vehicle">車輛的照片</string>
+    <string name="photo_plate_number">車牌號碼照片</string>
+    <string name="ad_area">廣告區域 (m X m)</string>
 
     <!-- HomeActivity -->
     <!-- HomeView -->
@@ -50,7 +61,7 @@
     <string name="personal_info">個人資訊</string>
     <string name="statistics">統計</string>
     <string name="full_name_comma">名字: </string>
-    <string name="date_birth_comma">生日: </string>
+    <string name="date_birth_comma">出生日期: </string>
     <string name="phone_number_comma">電話號碼: </string>
     <string name="save">保存</string>
     <string name="ad_completed_comma">Ad Completed: </string>

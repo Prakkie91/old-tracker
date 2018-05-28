@@ -39,4 +39,5 @@ dependencies {
     implementation 'com.google.android.gms:play-services-maps:15.0.0'
     implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
     implementation 'com.akexorcist:localizationactivity:1.2.2' //MultiLanguage
+    implementation 'com.theartofdev.edmodo:android-image-cropper:2.7.+'
 }

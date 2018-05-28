@@ -15,4 +15,6 @@
     <color name="background_btn_red_color_pressed">#f77</color>
     <color name="white">#fff</color>
     <color name="black">#000</color>
+    <color name="green">#08ea29</color>
+    <color name="dark_green">#07b919</color>
 </resources>

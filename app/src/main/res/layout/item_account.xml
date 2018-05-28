@@ -131,6 +131,7 @@
                             android:layout_width="@dimen/_200sdp"
                             android:layout_height="wrap_content"
                             android:text="Antonio"
+                            android:textColor="@color/txt_gray_color"
                             android:textSize="@dimen/_14sdp"/>
                     </LinearLayout>
 
@@ -148,9 +149,12 @@
                             android:textSize="@dimen/_14sdp"/>
 
                         <EditText
+                            android:id="@+id/birthDayET"
                             android:layout_width="@dimen/_200sdp"
                             android:layout_height="wrap_content"
                             android:text="May 21, 2018"
+                            android:textColor="@color/txt_gray_color"
+                            android:focusable="false"
                             android:textSize="@dimen/_14sdp"/>
                     </LinearLayout>
 
@@ -171,6 +175,7 @@
                             android:layout_width="@dimen/_200sdp"
                             android:layout_height="wrap_content"
                             android:text="123456789"
+                            android:textColor="@color/txt_gray_color"
                             android:textSize="@dimen/_14sdp"/>
                     </LinearLayout>
 

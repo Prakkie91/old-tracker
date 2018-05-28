@@ -3,100 +3,168 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activity.intro.VehicleActivity">
+    tools:context=".ui.activity.intro.VehicleActivity"
+    android:background="@color/background_color">
 
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/background_color">
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/iv"
-            android:layout_width="@dimen/_50sdp"
-            android:layout_height="@dimen/_50sdp"
-            android:background="@drawable/ic_logo"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/_60sdp"/>
-
-        <EditText
-            android:id="@+id/typeET"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_40sdp"
-            android:layout_marginLeft="@dimen/_25sdp"
-            android:layout_marginRight="@dimen/_25sdp"
-            android:layout_below="@id/iv"
-            android:layout_marginTop="@dimen/_60sdp"
-            android:background="@drawable/input_background"
-            android:paddingLeft="@dimen/_15sdp"
-            android:paddingRight="@dimen/_15sdp"
-            android:textColor="#fff"
-            android:textColorHint="#fff"
-            android:textSize="@dimen/_15sdp"
-            android:hint="@string/vehicle_type"
-            />
-
-        <EditText
-            android:id="@+id/numberET"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_40sdp"
-            android:layout_marginLeft="@dimen/_25sdp"
-            android:layout_marginRight="@dimen/_25sdp"
-            android:layout_below="@id/typeET"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:background="@drawable/input_background"
-            android:paddingLeft="@dimen/_15sdp"
-            android:paddingRight="@dimen/_15sdp"
-            android:textColor="#fff"
-            android:textColorHint="#fff"
-            android:textSize="@dimen/_15sdp"
-            android:hint="@string/vehicle_number"
-            android:inputType="number"/>
-
-        <RelativeLayout
-            android:id="@+id/expireRL"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/_25sdp"
-            android:layout_marginRight="@dimen/_25sdp"
-            android:layout_below="@id/numberET"
-            android:layout_marginTop="@dimen/_5sdp">
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:paddingBottom="@dimen/_30sdp">
+
+            <ImageView
+                android:id="@+id/iv"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:layout_marginTop="@dimen/_60sdp"
+                android:background="@drawable/ic_logo" />
+
+            <RelativeLayout
+                android:id="@+id/typeRL"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_25sdp"
+                android:layout_marginRight="@dimen/_25sdp"
+                android:layout_marginTop="@dimen/_60sdp"
+                android:background="@drawable/input_background">
+
+                <Spinner
+                    android:id="@+id/spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:prompt="@string/vehicle_type"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:layout_marginLeft="@dimen/_10sdp"/>
+            </RelativeLayout>
 
             <EditText
-                android:id="@+id/expireDateET"
+                android:id="@+id/numberET"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_40sdp"
+                android:layout_marginLeft="@dimen/_25sdp"
+                android:layout_marginRight="@dimen/_25sdp"
+                android:layout_marginTop="@dimen/_5sdp"
                 android:background="@drawable/input_background"
+                android:hint="@string/vehicle_number"
+                android:inputType="number"
                 android:paddingLeft="@dimen/_15sdp"
                 android:paddingRight="@dimen/_15sdp"
                 android:textColor="#fff"
                 android:textColorHint="#fff"
-                android:textSize="@dimen/_15sdp"
-                android:hint="@string/vehicle_expire_date"
-                android:focusable="false"
-                android:inputType="date"/>
+                android:textSize="@dimen/_15sdp" />
 
-            <ImageView
-                android:id="@+id/calendarIV"
-                android:layout_width="@dimen/_40sdp"
+            <RelativeLayout
+                android:id="@+id/expireRL"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_25sdp"
+                android:layout_marginRight="@dimen/_25sdp"
+                android:layout_marginTop="@dimen/_5sdp">
+
+                <EditText
+                    android:id="@+id/expireDateET"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:background="@drawable/input_background"
+                    android:focusable="false"
+                    android:hint="@string/vehicle_expire_date"
+                    android:inputType="date"
+                    android:paddingLeft="@dimen/_15sdp"
+                    android:paddingRight="@dimen/_15sdp"
+                    android:textColor="#fff"
+                    android:textColorHint="#fff"
+                    android:textSize="@dimen/_15sdp" />
+
+                <ImageView
+                    android:id="@+id/calendarIV"
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    android:padding="@dimen/_7sdp"
+                    android:src="@drawable/ic_calendar" />
+            </RelativeLayout>
+
+            <EditText
+                android:id="@+id/areaET"
+                android:layout_width="match_parent"
                 android:layout_height="@dimen/_40sdp"
-                android:src="@drawable/ic_calendar"
-                android:layout_alignParentRight="true"
-                android:padding="@dimen/_7sdp"
-                android:layout_marginRight="@dimen/_5sdp"/>
-        </RelativeLayout>
+                android:layout_marginLeft="@dimen/_25sdp"
+                android:layout_marginRight="@dimen/_25sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:background="@drawable/input_background"
+                android:hint="@string/ad_area"
+                android:inputType="number"
+                android:paddingLeft="@dimen/_15sdp"
+                android:paddingRight="@dimen/_15sdp"
+                android:textColor="#fff"
+                android:textColorHint="#fff"
+                android:textSize="@dimen/_15sdp" />
 
-        <Button
-            android:id="@+id/nextBtn"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_40sdp"
-            android:background="@drawable/blue_btn_background"
-            android:layout_marginLeft="@dimen/_25sdp"
-            android:layout_marginRight="@dimen/_25sdp"
-            android:layout_below="@id/expireRL"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:text="@string/next"
-            android:textColor="#fff"
-            android:textSize="@dimen/_15sdp"
-            />
-    </RelativeLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/photo_vehicle"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_14sdp"
+                android:layout_marginTop="@dimen/_10sdp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginLeft="@dimen/_25sdp"
+                android:layout_marginRight="@dimen/_25sdp">
+
+                <ImageView
+                    android:id="@+id/vehicleIV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scaleType="fitXY"
+                    android:adjustViewBounds="true"
+                    android:background="@drawable/default_img"/>
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/photo_plate_number"
+                android:textColor="@color/white"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:textSize="@dimen/_14sdp"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginLeft="@dimen/_25sdp"
+                android:layout_marginRight="@dimen/_25sdp">
+
+                <ImageView
+                    android:id="@+id/vehicleNumberIV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scaleType="fitXY"
+                    android:adjustViewBounds="true"
+                    android:background="@drawable/default_img"/>
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/nextBtn"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_marginLeft="@dimen/_25sdp"
+                android:layout_marginRight="@dimen/_25sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:background="@drawable/blue_btn_background"
+                android:text="@string/next"
+                android:textColor="#fff"
+                android:textSize="@dimen/_15sdp" />
+        </LinearLayout>
+    </ScrollView>
 </android.support.constraint.ConstraintLayout>

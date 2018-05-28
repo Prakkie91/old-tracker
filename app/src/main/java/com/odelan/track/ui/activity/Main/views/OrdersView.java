@@ -118,7 +118,8 @@ public class OrdersView extends BaseView {
         public void onBindViewHolder(final RecyclerView.ViewHolder mholder, final int position) {
             final RecyclerViewAdapter.ViewHolder holder = (RecyclerViewAdapter.ViewHolder) mholder;
             holder.mItem = mList.get(position);
-            holder.tv.setText(holder.mItem.title);
+            String desc = holder.mItem.title + ", " + mContext.getString(R.string.van) + ", HKD $200, " + mContext.getString(R.string.sample_order_name);
+            holder.tv.setText(desc);
 
             if (holder.mItem.status == Order.STATUS_ACCEPTED) {
                 holder.cv.setCardBackgroundColor(Color.parseColor("#880000ff"));

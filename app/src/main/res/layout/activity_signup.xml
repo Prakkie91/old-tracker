@@ -15,137 +15,166 @@
             android:id="@+id/iv"
             android:layout_width="@dimen/_50sdp"
             android:layout_height="@dimen/_50sdp"
-            android:background="@drawable/ic_logo"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/_40sdp"/>
+            android:layout_marginTop="@dimen/_40sdp"
+            android:background="@drawable/ic_logo" />
 
         <EditText
-            android:id="@+id/nameET"
+            android:id="@+id/firstNameET"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40sdp"
+            android:layout_below="@id/iv"
             android:layout_marginLeft="@dimen/_25sdp"
             android:layout_marginRight="@dimen/_25sdp"
-            android:layout_below="@id/iv"
             android:layout_marginTop="@dimen/_40sdp"
             android:background="@drawable/input_background"
+            android:hint="@string/first_name"
             android:paddingLeft="@dimen/_15sdp"
             android:paddingRight="@dimen/_15sdp"
             android:textColor="#fff"
             android:textColorHint="#fff"
-            android:textSize="@dimen/_15sdp"
-            android:hint="@string/full_name"
-            />
+            android:textSize="@dimen/_15sdp" />
 
         <EditText
-            android:id="@+id/idET"
+            android:id="@+id/lastNameET"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40sdp"
+            android:layout_below="@id/firstNameET"
             android:layout_marginLeft="@dimen/_25sdp"
             android:layout_marginRight="@dimen/_25sdp"
-            android:layout_below="@id/nameET"
             android:layout_marginTop="@dimen/_5sdp"
             android:background="@drawable/input_background"
+            android:hint="@string/last_name"
             android:paddingLeft="@dimen/_15sdp"
             android:paddingRight="@dimen/_15sdp"
             android:textColor="#fff"
             android:textColorHint="#fff"
-            android:textSize="@dimen/_15sdp"
-            android:hint="@string/hk_id"
-            />
+            android:textSize="@dimen/_15sdp" />
+
+        <RelativeLayout
+            android:id="@+id/birthDayRL"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/lastNameET"
+            android:layout_marginLeft="@dimen/_25sdp"
+            android:layout_marginRight="@dimen/_25sdp"
+            android:layout_marginTop="@dimen/_5sdp">
+
+            <EditText
+                android:id="@+id/birthDayET"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:background="@drawable/input_background"
+                android:hint="@string/date_of_birth"
+                android:paddingLeft="@dimen/_15sdp"
+                android:paddingRight="@dimen/_15sdp"
+                android:focusable="false"
+                android:textColor="#fff"
+                android:textColorHint="#fff"
+                android:textSize="@dimen/_15sdp" />
+
+            <ImageView
+                android:id="@+id/calendarIV"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:src="@drawable/ic_calendar"
+                android:layout_alignParentRight="true"
+                android:padding="@dimen/_7sdp"
+                android:layout_marginRight="@dimen/_5sdp"/>
+        </RelativeLayout>
 
         <EditText
             android:id="@+id/phoneET"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40sdp"
+            android:layout_below="@id/birthDayRL"
             android:layout_marginLeft="@dimen/_25sdp"
             android:layout_marginRight="@dimen/_25sdp"
-            android:layout_below="@id/idET"
             android:layout_marginTop="@dimen/_5sdp"
             android:background="@drawable/input_background"
+            android:hint="@string/phone"
+            android:inputType="phone"
             android:paddingLeft="@dimen/_15sdp"
             android:paddingRight="@dimen/_15sdp"
             android:textColor="#fff"
             android:textColorHint="#fff"
-            android:textSize="@dimen/_15sdp"
-            android:hint="@string/phone"
-            android:inputType="phone"/>
+            android:textSize="@dimen/_15sdp" />
 
         <EditText
             android:id="@+id/passwordET"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40sdp"
+            android:layout_below="@id/phoneET"
             android:layout_marginLeft="@dimen/_25sdp"
             android:layout_marginRight="@dimen/_25sdp"
-            android:layout_below="@id/phoneET"
             android:layout_marginTop="@dimen/_5sdp"
             android:background="@drawable/input_background"
+            android:hint="@string/password"
+            android:inputType="textPassword"
             android:paddingLeft="@dimen/_15sdp"
             android:paddingRight="@dimen/_15sdp"
             android:textColor="#fff"
             android:textColorHint="#fff"
-            android:textSize="@dimen/_15sdp"
-            android:hint="@string/password"
-            android:inputType="textPassword" />
+            android:textSize="@dimen/_15sdp" />
 
         <TextView
             android:id="@+id/termDescTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/agree_desc"
+            android:layout_below="@+id/passwordET"
             android:layout_centerHorizontal="true"
+            android:text="@string/agree_desc"
             android:textColor="@color/background_tv_color"
-            android:textSize="@dimen/_11sdp"
-            android:layout_below="@+id/passwordET"/>
+            android:textSize="@dimen/_11sdp" />
 
         <TextView
             android:id="@+id/termTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/terms_desc"
-            android:layout_centerHorizontal="true"
-            android:textColor="#fff"
-            android:textSize="@dimen/_11sdp"
             android:layout_below="@+id/termDescTV"
-            android:clickable="true"/>
+            android:layout_centerHorizontal="true"
+            android:clickable="true"
+            android:text="@string/terms_desc"
+            android:textColor="#fff"
+            android:textSize="@dimen/_11sdp" />
 
         <Button
             android:id="@+id/signupBtn"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40sdp"
-            android:background="@drawable/blue_btn_background"
+            android:layout_below="@id/termTV"
             android:layout_marginLeft="@dimen/_25sdp"
             android:layout_marginRight="@dimen/_25sdp"
-            android:layout_below="@id/termTV"
             android:layout_marginTop="@dimen/_5sdp"
+            android:background="@drawable/blue_btn_background"
             android:text="@string/signup"
             android:textColor="#fff"
-            android:textSize="@dimen/_15sdp"
-            />
+            android:textSize="@dimen/_15sdp" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
             android:layout_marginBottom="@dimen/_5sdp"
-            android:layout_centerHorizontal="true">
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/have_account"
                 android:textColor="@color/txt_color"
-                android:textSize="@dimen/_12sdp"/>
+                android:textSize="@dimen/_12sdp" />
 
             <TextView
                 android:id="@+id/loginTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:clickable="true"
                 android:text="@string/login"
                 android:textColor="#fff"
-                android:layout_marginLeft="@dimen/_10sdp"
-                android:textSize="@dimen/_13sdp"
-                android:clickable="true"/>
+                android:textSize="@dimen/_13sdp" />
         </LinearLayout>
     </RelativeLayout>
 
