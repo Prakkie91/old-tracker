@@ -1,7 +1,13 @@
 package com.odelan.track.utils;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
+import android.support.annotation.DrawableRes;
+import android.view.View;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -69,6 +75,40 @@ public class GoogleMapHelper {
         Marker marker = mMap.addMarker(markerOpt);
         return marker;
     }
+
+    /*private Bitmap getMarkerBitmapFromView(View view, @DrawableRes int resId) {
+
+        mMarkerImageView.setImageResource(resId);
+        view.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
+        view.layout(0, 0, view.getMeasuredWidth(), view.getMeasuredHeight());
+        view.buildDrawingCache();
+        Bitmap returnedBitmap = Bitmap.createBitmap(view.getMeasuredWidth(), view.getMeasuredHeight(),
+                Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(returnedBitmap);
+        canvas.drawColor(Color.WHITE, PorterDuff.Mode.SRC_IN);
+        Drawable drawable = view.getBackground();
+        if (drawable != null)
+            drawable.draw(canvas);
+        view.draw(canvas);
+        return returnedBitmap;
+    }
+
+    private Bitmap getMarkerBitmapFromView(View view, Bitmap bitmap) {
+
+        mMarkerImageView.setImageBitmap(bitmap);
+        view.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
+        view.layout(0, 0, view.getMeasuredWidth(), view.getMeasuredHeight());
+        view.buildDrawingCache();
+        Bitmap returnedBitmap = Bitmap.createBitmap(view.getMeasuredWidth(), view.getMeasuredHeight(),
+                Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(returnedBitmap);
+        canvas.drawColor(Color.WHITE, PorterDuff.Mode.SRC_IN);
+        Drawable drawable = view.getBackground();
+        if (drawable != null)
+            drawable.draw(canvas);
+        view.draw(canvas);
+        return returnedBitmap;
+    }*/
 
     /**
      * Add Circle part

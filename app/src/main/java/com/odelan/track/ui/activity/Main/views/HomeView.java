@@ -2,19 +2,34 @@ package com.odelan.track.ui.activity.Main.views;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.DrawableRes;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.odelan.track.MyApplication;
 import com.odelan.track.R;
 import com.odelan.track.data.model.Order;
@@ -115,7 +130,7 @@ public class HomeView extends BaseView {
         //item.lng = MyApplication.g_longitude - 0.1;
         item.lat = 22.2982372;
         item.lng = 114.1695309;
-        item.radius = 100;
+        item.radius = 1000;
         mData.add(item);
 
         item = new Order();
@@ -125,7 +140,7 @@ public class HomeView extends BaseView {
         //item.lng = MyApplication.g_longitude + 0.1212;
         item.lat = 22.3193429;
         item.lng = 114.1589395;
-        item.radius = 50;
+        item.radius = 500;
         mData.add(item);
 
         item = new Order();
@@ -135,7 +150,7 @@ public class HomeView extends BaseView {
         //item.lng = MyApplication.g_longitude - 0.3;
         item.lat = 22.2825059;
         item.lng = 114.1830503;
-        item.radius = 80;
+        item.radius = 800;
         mData.add(item);
     }
 
@@ -151,8 +166,8 @@ public class HomeView extends BaseView {
     private void showData() {
 
         getData();
-        LatLng myLocation = new LatLng(MyApplication.g_latitude, MyApplication.g_longitude);
-        googleMapHelper.addMaker(myLocation);
+        //LatLng myLocation = new LatLng(MyApplication.g_latitude, MyApplication.g_longitude);
+        //googleMapHelper.addMaker(myLocation);
 
         List<LatLng>bounds = new ArrayList<>();
         //bounds.add(myLocation);
@@ -164,11 +179,12 @@ public class HomeView extends BaseView {
             Circle circle = googleMapHelper.addCircle(latLng, item.radius);
             circle.setTag(item.oid);
             circle.setClickable(true);
-            googleMapHelper.addMaker(latLng);
+            //googleMapHelper.addMaker(latLng);
+            addCustomMarker(latLng);
         }
 
         //googleMapHelper.moveCameraPoint(myLocation, 9);
-        googleMapHelper.moveCameraBounds(bounds, 50);
+        googleMapHelper.moveCameraBounds(bounds, 100);
     }
 
     private boolean hasPermissionsGranted (String[] permissions) {
@@ -228,5 +244,90 @@ public class HomeView extends BaseView {
         stopBtn.setBackground(mContext.getResources().getDrawable(R.drawable.green_btn_background));
         mContext.showToast(mContext.getString(R.string.stopped));
     }
+
+    private void addCustomMarker(LatLng latlng) {
+        if (googleMap == null) {
+            return;
+        }
+
+        View mCustomMarkerView = ((LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.view_custom_marker, null);
+
+        // adding a marker on map with image from  drawable
+        googleMap.addMarker(new MarkerOptions()
+                .position(latlng)
+                .icon(BitmapDescriptorFactory.fromBitmap(getMarkerBitmapFromView(mCustomMarkerView, mContext.getString(R.string.ad_here)))));
+
+        // adding a marker with image from URL using glide image loading library
+        /*Glide.with(getApplicationContext()).
+                load(ImageUrl)
+                .asBitmap()
+                .fitCenter()
+                .into(new SimpleTarget<Bitmap>() {
+                    @Override
+                    public void onResourceReady(Bitmap bitmap, GlideAnimation<? super Bitmap> glideAnimation) {
+                        mMarkerTextView.setText("Ad here");
+                        mGoogleMap.addMarker(new MarkerOptions()
+                                .position(mDummyLatLng)
+                                .icon(BitmapDescriptorFactory.fromBitmap(getMarkerBitmapFromView(mCustomMarkerView, bitmap))));
+                        mGoogleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(mDummyLatLng, 13f));
+
+
+                    }
+                });*/
+
+
+    }
+
+    private Bitmap getMarkerBitmapFromView(View view, String title) {
+        ImageView mMarkerImageView = (ImageView) view.findViewById(R.id.iv);
+        TextView mMarkerTextView = (TextView) view.findViewById(R.id.tv);
+        mMarkerTextView.setText(title);
+        view.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
+        view.layout(0, 0, view.getMeasuredWidth(), view.getMeasuredHeight());
+        view.buildDrawingCache();
+        Bitmap returnedBitmap = Bitmap.createBitmap(view.getMeasuredWidth(), view.getMeasuredHeight(),
+                Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(returnedBitmap);
+        canvas.drawColor(Color.WHITE, PorterDuff.Mode.SRC_IN);
+        Drawable drawable = view.getBackground();
+        if (drawable != null)
+            drawable.draw(canvas);
+        view.draw(canvas);
+        return returnedBitmap;
+    }
+
+    /*private Bitmap getMarkerBitmapFromView(View view, @DrawableRes int resId) {
+
+        mMarkerImageView.setImageResource(resId);
+        view.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
+        view.layout(0, 0, view.getMeasuredWidth(), view.getMeasuredHeight());
+        view.buildDrawingCache();
+        Bitmap returnedBitmap = Bitmap.createBitmap(view.getMeasuredWidth(), view.getMeasuredHeight(),
+                Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(returnedBitmap);
+        canvas.drawColor(Color.WHITE, PorterDuff.Mode.SRC_IN);
+        Drawable drawable = view.getBackground();
+        if (drawable != null)
+            drawable.draw(canvas);
+        view.draw(canvas);
+        return returnedBitmap;
+    }
+
+    private Bitmap getMarkerBitmapFromView(View view, Bitmap bitmap) {
+
+        mMarkerImageView.setImageBitmap(bitmap);
+        view.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
+        view.layout(0, 0, view.getMeasuredWidth(), view.getMeasuredHeight());
+        view.buildDrawingCache();
+        Bitmap returnedBitmap = Bitmap.createBitmap(view.getMeasuredWidth(), view.getMeasuredHeight(),
+                Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(returnedBitmap);
+        canvas.drawColor(Color.WHITE, PorterDuff.Mode.SRC_IN);
+        Drawable drawable = view.getBackground();
+        if (drawable != null)
+            drawable.draw(canvas);
+        view.draw(canvas);
+        return returnedBitmap;
+    }*/
 }
 

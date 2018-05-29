@@ -52,6 +52,7 @@
     <string name="campaign">Campaign</string>
     <string name="start">Start</string>
     <string name="stop">Stop</string>
+    <string name="ad_here">Ad Here</string>
 
     <!-- OrderView -->
     <string name="orders">Orders</string>
