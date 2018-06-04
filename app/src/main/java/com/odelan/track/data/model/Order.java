@@ -2,6 +2,8 @@ package com.odelan.track.data.model;
 import com.bluelinelabs.logansquare.annotation.JsonField;
 import com.bluelinelabs.logansquare.annotation.JsonObject;
 
+import java.util.List;
+
 /**
  * Created by Administrator on 11/21/2016.
  */
@@ -14,24 +16,45 @@ public class Order extends BaseModel {
     public static final String STATUS_COMPLETED = "completed";
     public static final String STATUS_DELETED = "deleted";
 
-    @JsonField(name = "id")
+    @JsonField(name = "order_id")
     public String oid;
 
-    @JsonField(name = "title")
-    public String title;
+    @JsonField(name = "ad_ids")
+    public String aids;
 
-    @JsonField(name = "lat")
-    public double lat;
+    @JsonField(name = "ad_regions")
+    public List<AdRegionModel> ad_regions;
 
-    @JsonField(name = "lng")
-    public double lng;
+    @JsonField(name = "car_type_id")
+    public String car_type_id;
 
-    @JsonField(name = "radius")
-    public double radius; // (unit: m)
+    @JsonField(name = "car_type")
+    public String car_type;
 
-    @JsonField(name = "driver_id")
-    public String driver_id; // who is perform task in accepted case
+    @JsonField(name = "ad_theme")
+    public String ad_theme;
+
+    @JsonField(name = "ad_type_id")
+    public String ad_type_id;
+
+    @JsonField(name = "ad_type")
+    public String ad_type;
+
+    @JsonField(name = "ad_size")
+    public String ad_size;
+
+    @JsonField(name = "ad_period")
+    public String ad_period;
+
+    @JsonField(name = "amount")
+    public String amount;
 
     @JsonField(name = "status")
-    public String status; // pending, accepted, completed, deleted
+    public String status;
+
+    @JsonField(name = "user_id")
+    public String driver_id;
+
+    @JsonField(name = "created_at")
+    public String created_at;
 }

@@ -99,7 +99,6 @@
                 android:layout_marginTop="@dimen/_5sdp"
                 android:background="@drawable/input_background"
                 android:hint="@string/ad_area"
-                android:inputType="number"
                 android:paddingLeft="@dimen/_15sdp"
                 android:paddingRight="@dimen/_15sdp"
                 android:textColor="#fff"

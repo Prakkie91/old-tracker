@@ -69,4 +69,27 @@ public class FileUtils {
 
         return mypath.getAbsolutePath();
     }
+
+    public static String getFileFromBitmap(Context context, Bitmap bmp) {
+        ContextWrapper cw = new ContextWrapper(context);
+        File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
+
+        long time= System.currentTimeMillis();
+        String path = time + ".png";
+        File mypath = new File(directory, path);
+        Bitmap bitmap = null;
+
+        FileOutputStream fos = null;
+        String realurl = mypath.getAbsolutePath();
+        try {
+            fos = new FileOutputStream(mypath);
+            bmp.compress(Bitmap.CompressFormat.PNG, 50, fos);
+            fos.close();
+        } catch (Exception e) {
+            realurl = null;
+            e.printStackTrace();
+        }
+
+        return realurl;
+    }
 }

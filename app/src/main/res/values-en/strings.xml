@@ -4,6 +4,8 @@
     <!-- IntroActivity -->
     <string name="login">Log in</string>
     <string name="signup">Sign up</string>
+    <string name="success">Success</string>
+    <string name="failed">Failed</string>
 
     <!-- LoginActivity -->
     <string name="email">Email</string>
@@ -15,7 +17,6 @@
     <string name="warning_last_name">Please input last name</string>
     <string name="warning_date_of_birth">Please input date of birth</string>
     <string name="warning_phone">Please input phone number</string>
-    <string name="failed">Failed</string>
     <string name="network_error">Network Error</string>
 
     <!-- SignupActivity -->
@@ -79,6 +80,8 @@
     <string name="personal_info">Personal Info</string>
     <string name="statistics">Statistics</string>
     <string name="full_name_comma">Fullname: </string>
+    <string name="first_name_comma">Firstname: </string>
+    <string name="last_name_comma">Lastname: </string>
     <string name="date_birth_comma">Date of Birth: </string>
     <string name="phone_number_comma">Phone number: </string>
     <string name="save">Save</string>

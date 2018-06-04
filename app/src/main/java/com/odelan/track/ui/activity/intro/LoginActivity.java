@@ -103,18 +103,18 @@ public class LoginActivity extends BaseActivity {
                                 saveKeyValue("user", user.toString());
                                 startActivity(new Intent(mContext, HomeActivity.class));
                             } else {
-                                showToast("Network error");
+                                showToast(getString(R.string.failed));
                             }
                         } catch (Exception e) {
                             e.printStackTrace();
-                            showToast("Network error");
+                            showToast(getString(R.string.failed));
                         }
                     }
                     @Override
                     public void onError(ANError error) {
                         // handle error
                         dismissLoading();
-                        showToast("Network error");
+                        showToast(getString(R.string.network_error));
                     }
                 });
     }

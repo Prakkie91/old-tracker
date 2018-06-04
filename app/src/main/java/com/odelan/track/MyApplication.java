@@ -10,6 +10,7 @@ import android.graphics.drawable.GradientDrawable;
 import com.androidnetworking.AndroidNetworking;
 import com.odelan.track.utils.GPSTracker;
 
+import java.io.File;
 import java.util.List;
 
 
@@ -26,6 +27,9 @@ public class MyApplication extends Application {
     public static double g_longitude = 0;
 
     public static GPSTracker g_GPSTracker = null;
+
+    public static File g_VehiclePhoto;
+    public static File g_NumberPhoto;
 
     @Override
     public void onCreate() {
