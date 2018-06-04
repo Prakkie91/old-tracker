@@ -29,6 +29,8 @@ public class DriverLicenseActivity extends BaseActivity {
 
     DateTimeUtils dateTimeUtils;
 
+
+
     @Override
     protected int getLayoutResID() {
         return R.layout.activity_driver_license;
@@ -42,7 +44,40 @@ public class DriverLicenseActivity extends BaseActivity {
     }
 
     @OnClick(R.id.nextBtn) public void onNext() {
-        startActivity(new Intent(mContext, VehicleActivity.class));
+        if (numberET.getText().toString().isEmpty()) {
+            showToast(getString(R.string.warning_license_number));
+            return;
+        }
+
+        if (expireDateET.getText().toString().isEmpty()) {
+            showToast(getString(R.string.warning_expiry_date));
+            return;
+        }
+
+        if (classET.getText().toString().isEmpty()) {
+            showToast(getString(R.string.warning_license_class));
+            return;
+        }
+
+        Intent i = getIntent();
+        String first_name = i.getExtras().getString("first_name");
+        String last_name = i.getExtras().getString("last_name");
+        String email = i.getExtras().getString("email");
+        String birthday = i.getExtras().getString("birthday");
+        String phone = i.getExtras().getString("phone");
+        String password = i.getExtras().getString("password");
+
+        Intent intent = new Intent(mContext, VehicleActivity.class);
+        intent.putExtra("first_name", first_name);
+        intent.putExtra("last_name", last_name);
+        intent.putExtra("email", email);
+        intent.putExtra("birthday", birthday);
+        intent.putExtra("phone", phone);
+        intent.putExtra("password", password);
+        intent.putExtra("driving_license_number", numberET.getText().toString());
+        intent.putExtra("expire_date", expireDateET.getText().toString());
+        intent.putExtra("license_class", classET.getText().toString());
+        startActivity(intent);
     }
 
     @OnClick(R.id.calendarIV) public void onCalender() {

@@ -51,11 +51,27 @@
             android:textColorHint="#fff"
             android:textSize="@dimen/_15sdp" />
 
+        <EditText
+            android:id="@+id/emailET"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_below="@id/lastNameET"
+            android:layout_marginLeft="@dimen/_25sdp"
+            android:layout_marginRight="@dimen/_25sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@drawable/input_background"
+            android:hint="@string/email"
+            android:paddingLeft="@dimen/_15sdp"
+            android:paddingRight="@dimen/_15sdp"
+            android:textColor="#fff"
+            android:textColorHint="#fff"
+            android:textSize="@dimen/_15sdp" />
+
         <RelativeLayout
             android:id="@+id/birthDayRL"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/lastNameET"
+            android:layout_below="@id/emailET"
             android:layout_marginLeft="@dimen/_25sdp"
             android:layout_marginRight="@dimen/_25sdp"
             android:layout_marginTop="@dimen/_5sdp">

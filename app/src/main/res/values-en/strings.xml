@@ -9,6 +9,14 @@
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="do_not_have_account">Do not have an account yet?</string>
+    <string name="warning_input_email">Please input email</string>
+    <string name="warning_input_password">Please input password</string>
+    <string name="warning_first_name">Please input first name</string>
+    <string name="warning_last_name">Please input last name</string>
+    <string name="warning_date_of_birth">Please input date of birth</string>
+    <string name="warning_phone">Please input phone number</string>
+    <string name="failed">Failed</string>
+    <string name="network_error">Network Error</string>
 
     <!-- SignupActivity -->
     <string name="full_name">Full name</string>
@@ -26,6 +34,9 @@
     <string name="driver_expire_date">Driving License Expiry Date</string>
     <string name="driver_class">Driving License Class</string>
     <string name="next">Next</string>
+    <string name="warning_license_number">Please input driving license number</string>
+    <string name="warning_expiry_date">Please input driving license expiry date</string>
+    <string name="warning_license_class">Please input driving license class</string>
 
     <!-- VehicleActivity -->
     <string name="vehicle_type">Car Type</string>
@@ -39,6 +50,12 @@
     <string name="photo_vehicle">Photo of vehicle</string>
     <string name="photo_plate_number">Photo of vehicle plate number</string>
     <string name="ad_area">Advertising area (m X m)</string>
+    <string name="warning_car_type">Please choose car type</string>
+    <string name="warning_plate_number">Please input vehicle plate number</string>
+    <string name="warning_plate_number_expiry_date">Please input plate number expriy date</string>
+    <string name="warning_ad_area">Please input advertising area</string>
+    <string name="warning_vehicle_photo">Please input photo of vehicle</string>
+    <string name="warning_plate_number_photo">Please input photo of vehicle plate number</string>
 
     <!-- HomeActivity -->
     <!-- HomeView -->

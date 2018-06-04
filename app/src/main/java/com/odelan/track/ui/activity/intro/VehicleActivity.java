@@ -53,6 +53,7 @@ public class VehicleActivity extends BaseActivity {
     final String VEHICLE_PHOTO = "vehicle_photo";
     final String VEHICLE_NUMBER_PHOTO = "vehicle_number_photo";
     String photoType = "";
+    String carType = "";
 
     @Override
     protected int getLayoutResID() {
@@ -83,7 +84,7 @@ public class VehicleActivity extends BaseActivity {
                 if(spinner.getSelectedItem() == getString(R.string.vehicle_type)) {
 
                 } else {
-
+                    carType = vtypes.get(i);
                 }
             }
 
@@ -95,6 +96,28 @@ public class VehicleActivity extends BaseActivity {
     }
 
     @OnClick(R.id.nextBtn) public void onNext() {
+        if (carType.isEmpty()) {
+            showToast(getString(R.string.warning_car_type));
+            return;
+        }
+
+        if (numberET.getText().toString().isEmpty()) {
+            showToast(getString(R.string.warning_plate_number));
+            return;
+        }
+
+        if (expireDateET.getText().toString().isEmpty()) {
+            showToast(getString(R.string.warning_plate_number_expiry_date));
+            return;
+        }
+
+        if (areaET.getText().toString().isEmpty()) {
+            showToast(getString(R.string.warning_ad_area));
+            return;
+        }
+
+        // photo choose or not check
+
         startActivity(new Intent(mContext, HomeActivity.class));
     }
 

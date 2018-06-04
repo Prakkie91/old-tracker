@@ -29,6 +29,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.odelan.track.MyApplication;
 import com.odelan.track.R;
@@ -95,10 +96,28 @@ public class HomeView extends BaseView {
                     }
                 });
 
+                googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                    @Override
+                    public boolean onMarkerClick(Marker marker) {
+                        mContext.startActivity(new Intent(mContext, OrderDetailActivity.class));
+                        if (marker.getTag().toString() != null) {
+                            OrderDetailActivity.mOrder = getOrderWithID(marker.getTag().toString());
+                        }
+                        return false;
+                    }
+                });
+
                 if (!hasPermissionsGranted(PERMISSIONS)) {
                     requestPermissions(PERMISSIONS);
                 } else {
-                    readyGPS();
+                    googleMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
+                        @Override
+                        public void onMapLoaded() {
+                            //Your code where exception occurs goes here...
+                            readyGPS();
+                        }
+                    });
+
                 }
             }
         });
@@ -180,7 +199,7 @@ public class HomeView extends BaseView {
             circle.setTag(item.oid);
             circle.setClickable(true);
             //googleMapHelper.addMaker(latLng);
-            addCustomMarker(latLng);
+            addCustomMarker(item.oid, latLng);
         }
 
         //googleMapHelper.moveCameraPoint(myLocation, 9);
@@ -245,7 +264,7 @@ public class HomeView extends BaseView {
         mContext.showToast(mContext.getString(R.string.stopped));
     }
 
-    private void addCustomMarker(LatLng latlng) {
+    private void addCustomMarker(String oid, LatLng latlng) {
         if (googleMap == null) {
             return;
         }
@@ -253,9 +272,10 @@ public class HomeView extends BaseView {
         View mCustomMarkerView = ((LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.view_custom_marker, null);
 
         // adding a marker on map with image from  drawable
-        googleMap.addMarker(new MarkerOptions()
+        Marker marker = googleMap.addMarker(new MarkerOptions()
                 .position(latlng)
                 .icon(BitmapDescriptorFactory.fromBitmap(getMarkerBitmapFromView(mCustomMarkerView, mContext.getString(R.string.ad_here)))));
+        marker.setTag(oid);
 
         // adding a marker with image from URL using glide image loading library
         /*Glide.with(getApplicationContext()).
@@ -274,8 +294,6 @@ public class HomeView extends BaseView {
 
                     }
                 });*/
-
-
     }
 
     private Bitmap getMarkerBitmapFromView(View view, String title) {

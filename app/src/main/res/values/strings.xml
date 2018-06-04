@@ -9,6 +9,14 @@
     <string name="email">電子郵件</string>
     <string name="password">密碼</string>
     <string name="do_not_have_account">還沒有帳戶?</string>
+    <string name="warning_input_email">請輸入電子郵件</string>
+    <string name="warning_input_password">請輸入密碼</string>
+    <string name="warning_first_name">請輸入名字</string>
+    <string name="warning_last_name">請輸入姓氏</string>
+    <string name="warning_date_of_birth">請輸入出生日期</string>
+    <string name="warning_phone">請輸入電話號碼</string>
+    <string name="failed">失敗</string>
+    <string name="network_error">網路錯誤</string>
 
     <!-- SignupActivity -->
     <string name="full_name">名字</string>
@@ -26,6 +34,9 @@
     <string name="driver_expire_date">駕照到期日</string>
     <string name="driver_class">駕駛執照類</string>
     <string name="next">下一步</string>
+    <string name="warning_license_number">請輸入駕照號碼</string>
+    <string name="warning_expiry_date">請輸入駕照到期日</string>
+    <string name="warning_license_class">請輸入駕駛執照類</string>
 
     <!-- VehicleActivity -->
     <string name="vehicle_type">車種</string>
@@ -39,6 +50,12 @@
     <string name="photo_vehicle">車輛的照片</string>
     <string name="photo_plate_number">車牌號碼照片</string>
     <string name="ad_area">廣告區域 (m X m)</string>
+    <string name="warning_car_type">請選擇車種</string>
+    <string name="warning_plate_number">請輸入車牌號</string>
+    <string name="warning_plate_number_expiry_date">請輸入車牌號到期日</string>
+    <string name="warning_ad_area">請輸入廣告區域</string>
+    <string name="warning_vehicle_photo">請輸入車輛的照片</string>
+    <string name="warning_plate_number_photo">請輸入車牌號碼照片</string>
 
     <!-- HomeActivity -->
     <!-- HomeView -->

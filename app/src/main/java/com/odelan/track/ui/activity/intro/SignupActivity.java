@@ -26,6 +26,9 @@ public class SignupActivity extends BaseActivity {
     @BindView(R.id.lastNameET)
     EditText lastNameET;
 
+    @BindView(R.id.emailET)
+    EditText emailET;
+
     @BindView(R.id.birthDayET)
     EditText birthDayET;
 
@@ -50,7 +53,44 @@ public class SignupActivity extends BaseActivity {
     }
 
     @OnClick(R.id.signupBtn) public void onSignup() {
-        startActivity(new Intent(mContext, DriverLicenseActivity.class));
+        if (firstNameET.getText().toString().isEmpty()) {
+            showToast(getString(R.string.warning_first_name));
+            return;
+        }
+
+        if (lastNameET.getText().toString().isEmpty()) {
+            showToast(getString(R.string.warning_last_name));
+            return;
+        }
+
+        if (emailET.getText().toString().isEmpty()) {
+            showToast(getString(R.string.warning_input_email));
+            return;
+        }
+
+        if (birthDayET.getText().toString().isEmpty()) {
+            showToast(getString(R.string.warning_date_of_birth));
+            return;
+        }
+
+        if (phoneET.getText().toString().isEmpty()) {
+            showToast(getString(R.string.warning_phone));
+            return;
+        }
+
+        if (passworkET.getText().toString().isEmpty()) {
+            showToast(getString(R.string.warning_input_password));
+            return;
+        }
+
+        Intent intent = new Intent(mContext, DriverLicenseActivity.class);
+        intent.putExtra("first_name", firstNameET.getText().toString());
+        intent.putExtra("last_name", lastNameET.getText().toString());
+        intent.putExtra("email", emailET.getText().toString());
+        intent.putExtra("birthday", birthDayET.getText().toString());
+        intent.putExtra("phone", phoneET.getText().toString());
+        intent.putExtra("password", passworkET.getText().toString());
+        startActivity(intent);
     }
 
     @OnClick (R.id.loginTV) public void onLogin() {

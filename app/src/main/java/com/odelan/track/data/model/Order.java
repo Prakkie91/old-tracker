@@ -12,6 +12,7 @@ public class Order extends BaseModel {
     public static final String STATUS_PENDING = "pending";
     public static final String STATUS_ACCEPTED = "accepted";
     public static final String STATUS_COMPLETED = "completed";
+    public static final String STATUS_DELETED = "deleted";
 
     @JsonField(name = "id")
     public String oid;
@@ -32,5 +33,5 @@ public class Order extends BaseModel {
     public String driver_id; // who is perform task in accepted case
 
     @JsonField(name = "status")
-    public String status; // pending, accepted, completed
+    public String status; // pending, accepted, completed, deleted
 }

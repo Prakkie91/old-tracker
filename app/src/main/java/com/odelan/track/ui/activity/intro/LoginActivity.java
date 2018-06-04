@@ -7,12 +7,25 @@ import android.support.annotation.RequiresApi;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.common.Priority;
+import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.JSONObjectRequestListener;
+import com.bluelinelabs.logansquare.LoganSquare;
 import com.odelan.track.R;
+import com.odelan.track.data.model.User;
 import com.odelan.track.ui.activity.Main.HomeActivity;
 import com.odelan.track.ui.base.BaseActivity;
+import com.odelan.track.utils.MultiLanguageHelper;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+
+import static com.odelan.track.MyApplication.SERVER_URL;
+import static com.odelan.track.MyApplication.X_API_KEY;
 
 public class LoginActivity extends BaseActivity {
 
@@ -38,13 +51,18 @@ public class LoginActivity extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (multiLanguageHelper.getCurrentLanguage() == null || multiLanguageHelper.getCurrentLanguage().equals(multiLanguageHelper.LANG_VAL_CHINA)) {
+        if (multiLanguageHelper.getCurrentLanguage() == null ||
+                multiLanguageHelper.getCurrentLanguage().equals("") ||
+                multiLanguageHelper.getCurrentLanguage().equals(MultiLanguageHelper.LANG_VAL_CHINA)) {
             zhTV.setTextColor(getResources().getColor(R.color.txt_gray_color));
             enTV.setTextColor(getResources().getColor(R.color.white));
         } else {
             zhTV.setTextColor(getResources().getColor(R.color.white));
             enTV.setTextColor(getResources().getColor(R.color.txt_gray_color));
         }
+
+        emailET.setText("test@email.com");
+        passworkET.setText("aaaaaa");
     }
 
     @OnClick(R.id.signupTV)
@@ -54,18 +72,62 @@ public class LoginActivity extends BaseActivity {
 
     @OnClick(R.id.loginBtn)
     public void onLogin() {
-        startActivity(new Intent(mContext, HomeActivity.class));
+        if (emailET.getText().toString().isEmpty()) {
+            showToast(getString(R.string.warning_input_email));
+            return;
+        }
+
+        if (passworkET.getText().toString().isEmpty()) {
+            showToast(getString(R.string.warning_input_password));
+            return;
+        }
+
+        showLoading();
+        AndroidNetworking.post(SERVER_URL + "user/login")
+                .addHeaders("X-API-KEY", X_API_KEY)
+                .addBodyParameter("email", emailET.getText().toString())
+                .addBodyParameter("password", passworkET.getText().toString())
+                .setTag("login")
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        // do anything with response
+                        dismissLoading();
+                        try {
+                            int status = response.getInt("status");
+                            if (status == 1) {
+                                JSONObject user = response.getJSONObject("data");
+                                User me = LoganSquare.parse(user.toString(), User.class);
+                                saveKeyValue("user", user.toString());
+                                startActivity(new Intent(mContext, HomeActivity.class));
+                            } else {
+                                showToast("Network error");
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            showToast("Network error");
+                        }
+                    }
+                    @Override
+                    public void onError(ANError error) {
+                        // handle error
+                        dismissLoading();
+                        showToast("Network error");
+                    }
+                });
     }
 
     @OnClick(R.id.zhTV) public void onZhTV() {
         zhTV.setTextColor(getResources().getColor(R.color.txt_gray_color));
         enTV.setTextColor(getResources().getColor(R.color.white));
-        setLanguage(multiLanguageHelper.LANG_VAL_CHINA);
+        setLanguage(MultiLanguageHelper.LANG_VAL_CHINA);
     }
 
     @OnClick(R.id.enTV) public void onEnTV() {
         zhTV.setTextColor(getResources().getColor(R.color.white));
         enTV.setTextColor(getResources().getColor(R.color.txt_gray_color));
-        setLanguage(multiLanguageHelper.LANG_VAL_ENGLISH);
+        setLanguage(MultiLanguageHelper.LANG_VAL_ENGLISH);
     }
 }

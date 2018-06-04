@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
+import com.bluelinelabs.logansquare.LoganSquare;
 import com.kaopiz.kprogresshud.KProgressHUD;
+import com.odelan.track.data.model.User;
 import com.odelan.track.utils.Common;
 import com.odelan.track.utils.MultiLanguageHelper;
 
@@ -30,6 +32,17 @@ public abstract class BaseActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         mContext = this;
         multiLanguageHelper = new MultiLanguageHelper(mContext);
+    }
+
+    public User getMe() {
+        try {
+            String userStr = getValueFromKey("user");
+            User me = LoganSquare.parse(userStr, User.class);
+            return me;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public void setLanguage(String language){
@@ -65,8 +78,8 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (kProgressHUD == null) {
             kProgressHUD = KProgressHUD.create(this)
                     .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
-                    .setLabel("Please wait...")
-                    .setWindowColor(Color.parseColor("#DDDDDDDD"))
+                    //.setLabel("Please wait...")
+                    .setWindowColor(Color.parseColor("#DD000000"))
                     .setCancellable(true)
                     .setAnimationSpeed(1)
                     .setDimAmount(0.3f);
