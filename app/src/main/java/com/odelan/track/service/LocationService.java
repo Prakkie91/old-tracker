@@ -78,6 +78,7 @@ public class LocationService extends IntentService {
                 .addBodyParameter("lat", String.valueOf(g_latitude))
                 .addBodyParameter("lng", String.valueOf(g_longitude))
                 .addBodyParameter("speed", String.valueOf(g_speed))
+                //.addBodyParameter("speed", "20")
                 .addBodyParameter("status", g_status)
                 .setTag("saveRecord")
                 .setPriority(Priority.LOW)

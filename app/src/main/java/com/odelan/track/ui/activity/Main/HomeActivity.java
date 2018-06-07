@@ -66,7 +66,7 @@ public class HomeActivity extends BaseActivity {
 
                 g_latitude = location.getLatitude();
                 g_longitude = location.getLongitude();
-                g_speed = location.getSpeed();
+                g_speed = location.getSpeed(); // m/s
             }
         });
     }
