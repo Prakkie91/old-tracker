@@ -23,4 +23,7 @@ public class AdRegionModel extends BaseModel {
 
     @JsonField(name = "radius")
     public double radius; // (unit: m)
+
+    @JsonField(name = "order_id")
+    public String order_id;
 }

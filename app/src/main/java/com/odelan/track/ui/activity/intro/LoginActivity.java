@@ -12,6 +12,7 @@ import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.bluelinelabs.logansquare.LoganSquare;
+import com.odelan.track.MyApplication;
 import com.odelan.track.R;
 import com.odelan.track.data.model.User;
 import com.odelan.track.ui.activity.Main.HomeActivity;
@@ -61,8 +62,12 @@ public class LoginActivity extends BaseActivity {
             enTV.setTextColor(getResources().getColor(R.color.txt_gray_color));
         }
 
-        emailET.setText("test@email.com");
-        passworkET.setText("aaaaaa");
+        String email = getValueFromKey("email");
+        if (email != null && !email.equals("")) {
+            emailET.setText(email);
+            passworkET.setText(getValueFromKey("password"));
+        }
+
     }
 
     @OnClick(R.id.signupTV)
@@ -101,7 +106,9 @@ public class LoginActivity extends BaseActivity {
                                 JSONObject user = response.getJSONObject("data");
                                 User me = LoganSquare.parse(user.toString(), User.class);
                                 saveKeyValue("user", user.toString());
-                                startActivity(new Intent(mContext, HomeActivity.class));
+
+
+                                saveOneSignalId();
                             } else {
                                 showToast(getString(R.string.failed));
                             }
@@ -114,6 +121,38 @@ public class LoginActivity extends BaseActivity {
                     public void onError(ANError error) {
                         // handle error
                         dismissLoading();
+                        showToast(getString(R.string.network_error));
+                    }
+                });
+    }
+
+    public void saveOneSignalId() {
+        AndroidNetworking.post("http://ec2-34-228-199-199.compute-1.amazonaws.com/RestDemo/api/noti/checkOneId")
+                //.addQueryParameter("cookie", cookie)
+                .addBodyParameter("oneid", MyApplication.one_id_android)
+                .setPriority(Priority.LOW)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            int status = response.getInt("status");
+                            if(status == 1) {
+                                //showToast("success");
+                                saveKeyValue("email", emailET.getText().toString());
+                                saveKeyValue("password", passworkET.getText().toString());
+                                startActivity(new Intent(mContext, HomeActivity.class));
+                            } else {
+                                showToast(getString(R.string.failed));
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            showToast(getString(R.string.failed));
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError error) {
                         showToast(getString(R.string.network_error));
                     }
                 });

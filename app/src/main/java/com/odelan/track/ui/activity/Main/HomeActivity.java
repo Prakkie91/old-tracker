@@ -7,16 +7,21 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.odelan.track.R;
+import com.odelan.track.ui.activity.Main.views.AccountView;
 import com.odelan.track.ui.activity.Main.views.HomeView;
 import com.odelan.track.ui.activity.Main.views.OrdersView;
-import com.odelan.track.ui.activity.Main.views.AccountView;
 import com.odelan.track.ui.base.BaseActivity;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import devlight.io.library.ntb.NavigationTabBar;
+import im.delight.android.location.SimpleLocation;
+
+import static com.odelan.track.MyApplication.g_latitude;
+import static com.odelan.track.MyApplication.g_longitude;
+import static com.odelan.track.MyApplication.g_speed;
+import static com.odelan.track.MyApplication.gpsInterval;
 
 public class HomeActivity extends BaseActivity {
 
@@ -26,6 +31,10 @@ public class HomeActivity extends BaseActivity {
     HomeView homeView;
     OrdersView ordersView;
     AccountView accountView;
+
+    public SimpleLocation location;
+
+    public int selectedPage = 0;
 
     @Override
     protected int getLayoutResID() {
@@ -37,6 +46,49 @@ public class HomeActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         initUI(savedInstanceState);
+
+        boolean requireFineGranularity = false;
+        boolean passiveMode = false;
+        boolean requireNewLocation = false;
+        location = new SimpleLocation(this, requireFineGranularity, passiveMode, gpsInterval*1000, requireNewLocation);
+
+        if (!location.hasLocationEnabled()) {
+            // ask the user to enable location access
+            SimpleLocation.openSettings(this);
+        }
+
+        location.beginUpdates();
+
+        location.setListener(new SimpleLocation.Listener() {
+
+            public void onPositionChanged() {
+                // new location data has been received and can be accessed
+
+                g_latitude = location.getLatitude();
+                g_longitude = location.getLongitude();
+                g_speed = location.getSpeed();
+            }
+        });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        // make the device update its location
+        //location.beginUpdates();   // ...
+
+        if(selectedPage == 1) {
+            ordersView.getAllOrders();
+        }
+    }
+
+    @Override
+    public void onPause() {
+        // stop location updates (saves battery)
+        //location.endUpdates();
+
+        super.onPause();
     }
 
     private void initUI(final Bundle savedInstanceState) {
@@ -119,6 +171,14 @@ public class HomeActivity extends BaseActivity {
             @Override
             public void onPageSelected(final int position) {
                 //navigationTabBar.getModels().get(position).hideBadge();
+                selectedPage = position;
+                if (position == 0) {
+                    homeView.hasAcceptedOrder();
+                }
+
+                if(position == 1) {
+                    ordersView.getAllOrders();
+                }
             }
 
             @Override

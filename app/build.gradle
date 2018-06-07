@@ -9,6 +9,9 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        manifestPlaceholders = [onesignal_app_id: "7d0aced1-a5a8-4096-8cf6-86656b706c0a",
+                                // Project number pulled from dashboard, local value is ignored.
+                                onesignal_google_project_number: "REMOTE"]
     }
     buildTypes {
         release {
@@ -40,4 +43,7 @@ dependencies {
     implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
     //implementation 'com.akexorcist:localizationactivity:1.2.2' //MultiLanguage
     implementation 'com.theartofdev.edmodo:android-image-cropper:2.7.+'
+    implementation 'com.github.delight-im:Android-SimpleLocation:v1.0.1'
+    implementation 'com.google.android.gms:play-services-gcm:15.0.1'
+    implementation 'com.onesignal:OneSignal:3.5.8'
 }

@@ -14,8 +14,10 @@ import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.bluelinelabs.logansquare.LoganSquare;
 import com.odelan.track.R;
+import com.odelan.track.data.model.Order;
 import com.odelan.track.data.model.User;
 import com.odelan.track.ui.activity.Main.HomeActivity;
+import com.odelan.track.ui.activity.intro.LoginActivity;
 import com.odelan.track.utils.DateTimeUtils;
 import com.odelan.track.utils.TabAdapter;
 
@@ -49,6 +51,9 @@ public class AccountView extends BaseView {
 
     DateTimeUtils dateTimeUtils;
 
+    String count = "";
+    String earnAmount = "";
+
     @Override
     protected int getLayoutResID() {
         return R.layout.item_account;
@@ -57,7 +62,49 @@ public class AccountView extends BaseView {
     public AccountView(HomeActivity context) {
         super(context);
 
+        //getAccountEarnInfo();
         initLayout();
+    }
+
+    public void getAccountEarnInfo() {
+        User me = mContext.getMe();
+        mContext.showLoading();
+        AndroidNetworking.post(SERVER_URL + "order/getAccountEarnInfo")
+                .addHeaders("X-API-KEY", X_API_KEY)
+                .addBodyParameter("user_id", me.userid)
+                .setTag("getAccountEarnInfo")
+                .setPriority(Priority.LOW)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        // do anything with response
+                        mContext.dismissLoading();
+                        try {
+                            int status = response.getInt("status");
+                            if (status == 1) {
+                                JSONObject orderObj = response.getJSONObject("data");
+                                count = orderObj.getString("count");
+                                earnAmount = orderObj.getString("total_amount");
+
+                                adCountTV.setText(count);
+                                earnAmountTV.setText("HKD $" + earnAmount);
+
+                            } else {
+                                mContext.showToast(mContext.getString(R.string.failed));
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            mContext.showToast(mContext.getString(R.string.failed));
+                        }
+                    }
+                    @Override
+                    public void onError(ANError error) {
+                        // handle error
+                        mContext.dismissLoading();
+                        mContext.showToast(mContext.getString(R.string.network_error));
+                    }
+                });
     }
 
     private void initLayout() {
@@ -117,6 +164,7 @@ public class AccountView extends BaseView {
 
     @OnClick(R.id.secondTV) public void onSecondTabClick() {
         tabAdapter.onTabClick(secondTab);
+        getAccountEarnInfo();
     }
 
     @OnClick(R.id.saveBtn) public void onSave() {
@@ -156,5 +204,14 @@ public class AccountView extends BaseView {
                         mContext.showToast(mContext.getString(R.string.network_error));
                     }
                 });
+    }
+
+    @OnClick (R.id.logoutBtn) public void onLogout() {
+
+        mContext.saveKeyValue("email", "");
+        mContext.saveKeyValue("password", "");
+        Intent intent = new Intent(mContext, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        mContext.startActivity(intent);
     }
 }

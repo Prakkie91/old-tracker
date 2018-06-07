@@ -11,10 +11,8 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.annotation.DrawableRes;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -22,7 +20,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.google.android.gms.maps.CameraUpdateFactory;
+import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.common.Priority;
+import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.JSONObjectRequestListener;
+import com.bluelinelabs.logansquare.LoganSquare;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -33,11 +35,15 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.odelan.track.MyApplication;
 import com.odelan.track.R;
-import com.odelan.track.data.model.Order;
+import com.odelan.track.data.model.AdRegionModel;
+import com.odelan.track.data.model.User;
+import com.odelan.track.service.LocationService;
 import com.odelan.track.ui.activity.Main.HomeActivity;
 import com.odelan.track.ui.activity.Main.OrderDetailActivity;
 import com.odelan.track.utils.GPSTracker;
 import com.odelan.track.utils.GoogleMapHelper;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +51,10 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-import static com.google.android.gms.maps.CameraUpdateFactory.newLatLngBounds;
+import static com.odelan.track.MyApplication.SERVER_URL;
+import static com.odelan.track.MyApplication.X_API_KEY;
+import static com.odelan.track.MyApplication.g_status;
+import static com.odelan.track.MyApplication.isGPSServiceRunning;
 
 public class HomeView extends BaseView {
 
@@ -68,7 +77,10 @@ public class HomeView extends BaseView {
             Manifest.permission.ACCESS_NETWORK_STATE
     };
 
-    public List<Order> mData = new ArrayList<>();
+    public List<AdRegionModel> mData = new ArrayList<>();
+
+    boolean isMapReady = false;
+    String hasOrder = "false";
 
     @Override
     protected int getLayoutResID() {
@@ -91,7 +103,7 @@ public class HomeView extends BaseView {
                     public void onCircleClick(Circle circle) {
                         mContext.startActivity(new Intent(mContext, OrderDetailActivity.class));
                         if (circle.getTag().toString() != null) {
-                            OrderDetailActivity.mOrder = getOrderWithID(circle.getTag().toString());
+                            OrderDetailActivity.mOrderId = getAdRegionWithID(circle.getTag().toString()).order_id;
                         }
                     }
                 });
@@ -101,7 +113,7 @@ public class HomeView extends BaseView {
                     public boolean onMarkerClick(Marker marker) {
                         mContext.startActivity(new Intent(mContext, OrderDetailActivity.class));
                         if (marker.getTag().toString() != null) {
-                            OrderDetailActivity.mOrder = getOrderWithID(marker.getTag().toString());
+                            OrderDetailActivity.mOrderId = getAdRegionWithID(marker.getTag().toString()).order_id;
                         }
                         return false;
                     }
@@ -113,11 +125,9 @@ public class HomeView extends BaseView {
                     googleMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
                         @Override
                         public void onMapLoaded() {
-                            //Your code where exception occurs goes here...
                             readyGPS();
                         }
                     });
-
                 }
             }
         });
@@ -132,74 +142,135 @@ public class HomeView extends BaseView {
                 MyApplication.g_longitude = MyApplication.g_GPSTracker.getLongitude();
 
                 googleMap.setMyLocationEnabled(true);
-                showData();
+                hasAcceptedOrder();
+                //getAllRegions();
+                isMapReady = true;
             } else {
                 MyApplication.g_GPSTracker.showSettingsAlert();
             }
         }
     }
 
-    public void getData() {
-        mData = new ArrayList<>();
-
-        Order item = new Order();
-        item.oid = "1";
-        item.title = mContext.getString(R.string.order)+1;
-        //item.lat = MyApplication.g_latitude - 0.1;
-        //item.lng = MyApplication.g_longitude - 0.1;
-        item.lat = 22.2982372;
-        item.lng = 114.1695309;
-        item.radius = 1000;
-        mData.add(item);
-
-        item = new Order();
-        item.oid = "2";
-        item.title = mContext.getString(R.string.order)+2;
-        //item.lat = MyApplication.g_latitude -0.1515;
-        //item.lng = MyApplication.g_longitude + 0.1212;
-        item.lat = 22.3193429;
-        item.lng = 114.1589395;
-        item.radius = 500;
-        mData.add(item);
-
-        item = new Order();
-        item.oid = "3";
-        item.title = mContext.getString(R.string.order)+3;
-        //item.lat = MyApplication.g_latitude + 0.3;
-        //item.lng = MyApplication.g_longitude - 0.3;
-        item.lat = 22.2825059;
-        item.lng = 114.1830503;
-        item.radius = 800;
-        mData.add(item);
-    }
-
-    public Order getOrderWithID(String oid) {
-        for (Order o : mData) {
-            if (o.oid == oid) {
-                return o;
+    public AdRegionModel getAdRegionWithID(String aid) {
+        for (AdRegionModel am: mData) {
+            if (am.aid.equals(aid)) {
+                return am;
             }
         }
         return null;
     }
 
-    private void showData() {
+    public void hasAcceptedOrder() {
+        User me = mContext.getMe();
+        mContext.showLoading();
+        AndroidNetworking.post(SERVER_URL + "order/hasAcceptedOrder")
+                .addHeaders("X-API-KEY", X_API_KEY)
+                .addBodyParameter("user_id", me.userid)
+                .setTag("hasAcceptedOrder")
+                .setPriority(Priority.LOW)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        // do anything with response
+                        mContext.dismissLoading();
+                        try {
+                            int status = response.getInt("status");
+                            if (status == 1) {
+                                hasOrder = response.getString("data");
+                                if (hasOrder.equals("true")) {
+                                    if (isGPSServiceRunning) {
+                                        startBtn.setBackground(mContext.getResources().getDrawable(R.drawable.green_btn_background));
+                                        stopBtn.setBackground(mContext.getResources().getDrawable(R.drawable.blue_btn_background));
+                                    } else {
+                                        startBtn.setBackground(mContext.getResources().getDrawable(R.drawable.blue_btn_background));
+                                        stopBtn.setBackground(mContext.getResources().getDrawable(R.drawable.green_btn_background));
+                                    }
+                                } else {
+                                    g_status = "invalid";
+                                    MyApplication.stopGPSservice(mContext);
+                                    startBtn.setBackground(mContext.getResources().getDrawable(R.drawable.gray_btn_background));
+                                    stopBtn.setBackground(mContext.getResources().getDrawable(R.drawable.gray_btn_background));
+                                }
+                            } else {
+                                mContext.showToast(mContext.getString(R.string.failed));
+                                startBtn.setBackground(mContext.getResources().getDrawable(R.drawable.gray_btn_background));
+                                stopBtn.setBackground(mContext.getResources().getDrawable(R.drawable.gray_btn_background));
+                                hasOrder = "false";
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            mContext.showToast(mContext.getString(R.string.failed));
+                            startBtn.setBackground(mContext.getResources().getDrawable(R.drawable.gray_btn_background));
+                            stopBtn.setBackground(mContext.getResources().getDrawable(R.drawable.gray_btn_background));
+                            hasOrder = "false";
+                        }
 
-        getData();
-        //LatLng myLocation = new LatLng(MyApplication.g_latitude, MyApplication.g_longitude);
-        //googleMapHelper.addMaker(myLocation);
+                        getAllRegions();
+                    }
+                    @Override
+                    public void onError(ANError error) {
+                        // handle error
+                        mContext.dismissLoading();
+                        mContext.showToast(mContext.getString(R.string.network_error));
+                        startBtn.setBackgroundColor(Color.GRAY);
+                        stopBtn.setBackgroundColor(Color.GRAY);
+                        hasOrder = "false";
+                    }
+                });
+    }
+
+    public void getAllRegions() {
+        if (!isMapReady) {
+            return;
+        }
+        mContext.showLoading();
+        AndroidNetworking.post(SERVER_URL + "order/getAllRegions")
+                .addHeaders("X-API-KEY", X_API_KEY)
+                .setTag("getAllRegions")
+                .setPriority(Priority.LOW)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        // do anything with response
+                        mContext.dismissLoading();
+                        try {
+                            int status = response.getInt("status");
+                            if (status == 1) {
+                                mData = LoganSquare.parseList(response.getString("data"), AdRegionModel.class);
+                                showData();
+                            } else {
+                                mContext.showToast(mContext.getString(R.string.failed));
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            mContext.showToast(mContext.getString(R.string.failed));
+                        }
+                    }
+                    @Override
+                    public void onError(ANError error) {
+                        // handle error
+                        mContext.dismissLoading();
+                        mContext.showToast(mContext.getString(R.string.network_error));
+                    }
+                });
+    }
+
+    private void showData() {
 
         List<LatLng>bounds = new ArrayList<>();
         //bounds.add(myLocation);
 
-        for (Order item : mData) {
+        for (AdRegionModel item : mData) {
             LatLng latLng = new LatLng(item.lat, item.lng);
             bounds.add(latLng);
 
             Circle circle = googleMapHelper.addCircle(latLng, item.radius);
-            circle.setTag(item.oid);
+            circle.setTag(item.aid);
             circle.setClickable(true);
             //googleMapHelper.addMaker(latLng);
-            addCustomMarker(item.oid, latLng);
+            addCustomMarker(item.aid, latLng);
         }
 
         //googleMapHelper.moveCameraPoint(myLocation, 9);
@@ -253,15 +324,31 @@ public class HomeView extends BaseView {
     }
 
     @OnClick(R.id.startBtn) public void onStart() {
+        if (hasOrder.equals("false")) {
+            return;
+        }
+
+        g_status = "valid";
+
         startBtn.setBackground(mContext.getResources().getDrawable(R.drawable.green_btn_background));
         stopBtn.setBackground(mContext.getResources().getDrawable(R.drawable.blue_btn_background));
         mContext.showToast(mContext.getString(R.string.recording));
+
+        MyApplication.startGPSservice(mContext);
     }
 
     @OnClick(R.id.stopBtn) public void onStop() {
+        if (hasOrder.equals("false")) {
+            return;
+        }
+
+        g_status = "invalid";
+
         startBtn.setBackground(mContext.getResources().getDrawable(R.drawable.blue_btn_background));
         stopBtn.setBackground(mContext.getResources().getDrawable(R.drawable.green_btn_background));
         mContext.showToast(mContext.getString(R.string.stopped));
+
+        MyApplication.stopGPSservice(mContext);
     }
 
     private void addCustomMarker(String oid, LatLng latlng) {

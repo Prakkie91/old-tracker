@@ -131,7 +131,6 @@
                             android:id="@+id/firstNameET"
                             android:layout_width="@dimen/_200sdp"
                             android:layout_height="wrap_content"
-                            android:text="Antonio"
                             android:textColor="@color/txt_gray_color"
                             android:textSize="@dimen/_14sdp"/>
                     </LinearLayout>
@@ -153,7 +152,6 @@
                             android:id="@+id/lastNameET"
                             android:layout_width="@dimen/_200sdp"
                             android:layout_height="wrap_content"
-                            android:text="Antonio"
                             android:textColor="@color/txt_gray_color"
                             android:textSize="@dimen/_14sdp"/>
                     </LinearLayout>
@@ -175,7 +173,6 @@
                             android:id="@+id/birthDayET"
                             android:layout_width="@dimen/_200sdp"
                             android:layout_height="wrap_content"
-                            android:text="May 21, 2018"
                             android:textColor="@color/txt_gray_color"
                             android:focusable="false"
                             android:textSize="@dimen/_14sdp"/>
@@ -199,7 +196,6 @@
                             android:layout_width="@dimen/_200sdp"
                             android:layout_height="wrap_content"
                             android:inputType="number"
-                            android:text="123456789"
                             android:textColor="@color/txt_gray_color"
                             android:textSize="@dimen/_14sdp"/>
                     </LinearLayout>
@@ -212,6 +208,17 @@
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="@dimen/_20sdp"
                         android:text="@string/save"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/_15sdp"/>
+
+                    <Button
+                        android:id="@+id/logoutBtn"
+                        android:layout_width="@dimen/_150sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:background="@drawable/blue_btn_background"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:text="@string/logout"
                         android:textColor="@android:color/white"
                         android:textSize="@dimen/_15sdp"/>
                 </LinearLayout>
@@ -240,7 +247,6 @@
                             android:id="@+id/adCountTV"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="10"
                             android:textSize="@dimen/_14sdp"/>
                     </LinearLayout>
 
@@ -260,7 +266,6 @@
                             android:id="@+id/earnAmountTV"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="HKD $1000"
                             android:textSize="@dimen/_14sdp"/>
                     </LinearLayout>
                 </LinearLayout>

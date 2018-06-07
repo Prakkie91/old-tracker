@@ -85,6 +85,7 @@
     <string name="date_birth_comma">出生日期: </string>
     <string name="phone_number_comma">電話號碼: </string>
     <string name="save">保存</string>
+    <string name="logout">登出</string>
     <string name="ad_completed_comma">Ad Completed: </string>
     <string name="total_amount_earned_comma">Total Amount Earned: </string>
 
@@ -97,6 +98,16 @@
     <string name="ad_period">Ad Period: </string>
     <string name="amount">Amount: </string>
     <string name="cancel">取消</string>
+    <string name="car_type">車種: </string>
+    <string name="ad_theme">Ad Theme: </string>
+    <string name="status">Status: </string>
+    <string name="full_body">Full Body</string>
+    <string name="twice_sided">2 Sided</string>
+    <string name="back_door">Back Door</string>
+    <string name="pending">Pending</string>
+    <string name="completed">Completed</string>
+    <string name="deleted">Deleted</string>
+    <string name="complete">Complete</string>
 
     <!-- OrderDetailActivity -->
     <string name="accepted">接受</string>

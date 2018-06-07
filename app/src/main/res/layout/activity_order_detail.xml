@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.activity.Main.CurrentOrderDetailActivity">
+    tools:context=".ui.activity.Main.OrderDetailActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -74,10 +74,11 @@
                     android:textSize="@dimen/_14sdp" />
 
                 <TextView
+                    android:id="@+id/regionTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/sample_order_name"
                     android:textSize="@dimen/_14sdp"
+                    android:layout_marginLeft="@dimen/_5sdp"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -94,9 +95,50 @@
                     android:textSize="@dimen/_14sdp" />
 
                 <TextView
+                    android:id="@+id/adTypeTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="ad type "
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:textSize="@dimen/_14sdp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/car_type"
+                    android:textSize="@dimen/_14sdp" />
+
+                <TextView
+                    android:id="@+id/carTypeTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:textSize="@dimen/_14sdp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ad_theme"
+                    android:textSize="@dimen/_14sdp" />
+
+                <TextView
+                    android:id="@+id/adThemeTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_5sdp"
                     android:textSize="@dimen/_14sdp" />
             </LinearLayout>
 
@@ -113,9 +155,10 @@
                     android:textSize="@dimen/_14sdp" />
 
                 <TextView
+                    android:id="@+id/adsizeTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="10 X 10 (Km)"
+                    android:layout_marginLeft="@dimen/_5sdp"
                     android:textSize="@dimen/_14sdp" />
             </LinearLayout>
 
@@ -132,9 +175,10 @@
                     android:textSize="@dimen/_14sdp" />
 
                 <TextView
+                    android:id="@+id/periodTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="May, 2018 to June, 2018"
+                    android:layout_marginLeft="@dimen/_5sdp"
                     android:textSize="@dimen/_14sdp" />
             </LinearLayout>
 
@@ -151,24 +195,80 @@
                     android:textSize="@dimen/_14sdp"/>
 
                 <TextView
+                    android:id="@+id/amountTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="HKD $1000"
+                    android:layout_marginLeft="@dimen/_5sdp"
                     android:textSize="@dimen/_14sdp"/>
             </LinearLayout>
 
-            <Button
-                android:id="@+id/acceptBtn"
-                android:layout_width="@dimen/_120sdp"
-                android:layout_height="@dimen/_40sdp"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/status"
+                    android:textSize="@dimen/_14sdp" />
+
+                <TextView
+                    android:id="@+id/statusTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:textSize="@dimen/_14sdp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:background="@drawable/blue_btn_background"
-                android:layout_marginLeft="@dimen/_25sdp"
-                android:layout_marginRight="@dimen/_25sdp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_20sdp"
-                android:text="@string/accept"
-                android:textColor="#fff"
-                android:textSize="@dimen/_15sdp" />
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/cancelBtn"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    android:background="@drawable/blue_btn_background"
+                    android:text="@string/cancel"
+                    android:textColor="#fff"
+                    android:textSize="@dimen/_15sdp"
+                    android:visibility="gone"/>
+                <Button
+                    android:id="@+id/acceptBtn"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    android:background="@drawable/blue_btn_background"
+                    android:text="@string/accept"
+                    android:textColor="#fff"
+                    android:textSize="@dimen/_15sdp"
+                    android:visibility="gone"/>
+                <Button
+                    android:id="@+id/completeBtn"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    android:background="@drawable/blue_btn_background"
+                    android:text="@string/complete"
+                    android:textColor="#fff"
+                    android:textSize="@dimen/_15sdp"
+                    android:visibility="gone"/>
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

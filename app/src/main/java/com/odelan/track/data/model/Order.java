@@ -57,4 +57,19 @@ public class Order extends BaseModel {
 
     @JsonField(name = "created_at")
     public String created_at;
+
+    @JsonField(name = "start_date")
+    public String start_date;
+
+    @JsonField(name = "end_date")
+    public String end_date;
+
+    @JsonField(name = "order_days")
+    public String order_days;
+
+    @JsonField(name = "order_months")
+    public String order_months;
+
+    @JsonField(name = "isPassed")
+    public String isPassed;
 }

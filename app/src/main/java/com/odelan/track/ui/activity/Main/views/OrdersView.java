@@ -11,18 +11,26 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.odelan.track.MyApplication;
+import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.common.Priority;
+import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.JSONObjectRequestListener;
+import com.bluelinelabs.logansquare.LoganSquare;
 import com.odelan.track.R;
 import com.odelan.track.data.model.Order;
-import com.odelan.track.ui.activity.Main.CurrentOrderDetailActivity;
+import com.odelan.track.data.model.User;
 import com.odelan.track.ui.activity.Main.HomeActivity;
 import com.odelan.track.ui.activity.Main.OrderDetailActivity;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
+
+import static com.odelan.track.MyApplication.SERVER_URL;
+import static com.odelan.track.MyApplication.X_API_KEY;
 
 public class OrdersView extends BaseView {
 
@@ -43,40 +51,40 @@ public class OrdersView extends BaseView {
         super(context);
 
         setLayout();
-        getData();
     }
 
-    public void getData() {
-        mData = new ArrayList<>();
-
-        Order item = new Order();
-        item.oid = "1";
-        item.title = mContext.getString(R.string.order)+1;
-        item.lat = MyApplication.g_latitude - 0.1;
-        item.lng = MyApplication.g_longitude - 0.1;
-        item.radius = 5000;
-        item.status = Order.STATUS_ACCEPTED;
-        mData.add(item);
-
-        item = new Order();
-        item.oid = "2";
-        item.title = mContext.getString(R.string.order)+2;
-        item.lat = MyApplication.g_latitude -0.1515;
-        item.lng = MyApplication.g_longitude + 0.1212;
-        item.radius = 10000;
-        item.status = Order.STATUS_PENDING;
-        mData.add(item);
-
-        item = new Order();
-        item.oid = "3";
-        item.title = mContext.getString(R.string.order)+3;
-        item.lat = MyApplication.g_latitude + 0.3;
-        item.lng = MyApplication.g_longitude - 0.3;
-        item.radius = 8000;
-        item.status = Order.STATUS_PENDING;
-        mData.add(item);
-
-        recyclerView.setAdapter(new RecyclerViewAdapter(mData));
+    public void getAllOrders () {
+        mContext.showLoading();
+        AndroidNetworking.post(SERVER_URL + "order/getAllOrders")
+                .addHeaders("X-API-KEY", X_API_KEY)
+                .setTag("getAllOrders")
+                .setPriority(Priority.LOW)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        // do anything with response
+                        mContext.dismissLoading();
+                        try {
+                            int status = response.getInt("status");
+                            if (status == 1) {
+                                mData = LoganSquare.parseList(response.getString("data"), Order.class);
+                                recyclerView.setAdapter(new RecyclerViewAdapter(mData));
+                            } else {
+                                mContext.showToast(mContext.getString(R.string.failed));
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            mContext.showToast(mContext.getString(R.string.failed));
+                        }
+                    }
+                    @Override
+                    public void onError(ANError error) {
+                        // handle error
+                        mContext.dismissLoading();
+                        mContext.showToast(mContext.getString(R.string.network_error));
+                    }
+                });
     }
 
     private void setLayout() {
@@ -118,10 +126,11 @@ public class OrdersView extends BaseView {
         public void onBindViewHolder(final RecyclerView.ViewHolder mholder, final int position) {
             final RecyclerViewAdapter.ViewHolder holder = (RecyclerViewAdapter.ViewHolder) mholder;
             holder.mItem = mList.get(position);
-            String desc = holder.mItem.title + ", " + mContext.getString(R.string.van) + ", HKD $200, " + mContext.getString(R.string.sample_order_name);
+            String desc = mContext.getString(R.string.order) + holder.mItem.oid + ", " + holder.mItem.car_type + ", " + holder.mItem.amount;
             holder.tv.setText(desc);
 
-            if (holder.mItem.status == Order.STATUS_ACCEPTED) {
+            User me = mContext.getMe();
+            if (holder.mItem.status.equals(Order.STATUS_ACCEPTED) && me.userid.equals(holder.mItem.driver_id)) {
                 holder.cv.setCardBackgroundColor(Color.parseColor("#880000ff"));
             } else {
                 holder.cv.setCardBackgroundColor(Color.WHITE);
@@ -130,13 +139,8 @@ public class OrdersView extends BaseView {
             holder.cv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (holder.mItem.status == Order.STATUS_ACCEPTED) {
-                        mContext.startActivity(new Intent(mContext, CurrentOrderDetailActivity.class));
-                        CurrentOrderDetailActivity.mOrder = holder.mItem;
-                    } else {
-                        mContext.startActivity(new Intent(mContext, OrderDetailActivity.class));
-                        OrderDetailActivity.mOrder = holder.mItem;
-                    }
+                    mContext.startActivity(new Intent(mContext, OrderDetailActivity.class));
+                    OrderDetailActivity.mOrderId = holder.mItem.oid;
                 }
             });
         }

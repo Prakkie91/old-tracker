@@ -26,6 +26,25 @@
             </intent-filter>
         </activity>
 
+        <service
+            android:name=".service.LocationService"
+            android:exported="false"/>
+
+        <receiver android:name=".service.ReceiverCall" >
+            <intent-filter>
+                <action android:name="com.odelan.track" />
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name=".service.NotificationExtenderBareBonesExample"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.onesignal.NotificationExtender" />
+            </intent-filter>
+        </service>
+
         <!-- Google Map Api Key -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -53,10 +72,6 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.activity.Main.HomeActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".ui.activity.Main.CurrentOrderDetailActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity

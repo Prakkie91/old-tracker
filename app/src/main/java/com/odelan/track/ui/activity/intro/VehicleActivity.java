@@ -18,6 +18,7 @@ import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.bluelinelabs.logansquare.LoganSquare;
+import com.odelan.track.MyApplication;
 import com.odelan.track.R;
 import com.odelan.track.data.model.User;
 import com.odelan.track.ui.activity.Main.HomeActivity;
@@ -202,6 +203,8 @@ public class VehicleActivity extends BaseActivity {
                                 User me = LoganSquare.parse(user.toString(), User.class);
                                 saveKeyValue("user", user.toString());
                                 startActivity(new Intent(mContext, HomeActivity.class));
+
+                                saveOneSignalId();
                             } else {
                                 showToast(getString(R.string.failed));
                             }
@@ -296,5 +299,34 @@ public class VehicleActivity extends BaseActivity {
 
             return count>0 ? count-1 : count ;
         }
+    }
+
+    public void saveOneSignalId() {
+        AndroidNetworking.post("http://ec2-34-228-199-199.compute-1.amazonaws.com/RestDemo/api/noti/checkOneId")
+                //.addQueryParameter("cookie", cookie)
+                .addBodyParameter("oneid", MyApplication.one_id_android)
+                .setPriority(Priority.LOW)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            int status = response.getInt("status");
+                            if(status == 1) {
+                                //showToast("success");
+                            } else {
+                                //showToast("fail");
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            //showToast("Network Error!");
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError error) {
+                        //showToast(error.getErrorBody().toString());
+                    }
+                });
     }
 }
