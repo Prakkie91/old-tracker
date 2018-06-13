@@ -6,7 +6,6 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
-
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -28,9 +27,9 @@
 
         <service
             android:name=".service.LocationService"
-            android:exported="false"/>
+            android:exported="false" />
 
-        <receiver android:name=".service.ReceiverCall" >
+        <receiver android:name=".service.ReceiverCall">
             <intent-filter>
                 <action android:name="com.odelan.track" />
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
@@ -53,7 +52,6 @@
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />
-
         <activity
             android:name=".ui.activity.intro.IntroActivity"
             android:screenOrientation="portrait"
@@ -78,6 +76,13 @@
             android:name=".ui.activity.Main.OrderDetailActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.activity.intro.ForgotPasswordActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ui.activity.intro.ResetPasswordActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

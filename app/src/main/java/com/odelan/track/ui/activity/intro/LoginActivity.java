@@ -70,6 +70,10 @@ public class LoginActivity extends BaseActivity {
 
     }
 
+    @OnClick(R.id.forgotPasswordTV) public void onForgotPassword() {
+        startActivity(new Intent(mContext, ForgotPasswordActivity.class));
+    }
+
     @OnClick(R.id.signupTV)
     public void onSignup() {
         startActivity(new Intent(mContext, SignupActivity.class));

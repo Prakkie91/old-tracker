@@ -18,6 +18,20 @@
     <string name="warning_date_of_birth">請輸入出生日期</string>
     <string name="warning_phone">請輸入電話號碼</string>
     <string name="network_error">網路錯誤</string>
+    <string name="forgot_password">忘記密碼?</string>
+
+    <!-- ForgotPasswordActivity -->
+    <string name="send">發送</string>
+    <string name="sent_email">Sent email</string>
+    <string name="forgot_password_title">忘記密碼</string>
+
+    <!-- ResetPasswordActivity -->
+    <string name="reset_password">重置密碼</string>
+    <string name="verify_code">验证代码</string>
+    <string name="repreat_password">重複密碼</string>
+    <string name="warning_code">請輸入驗證碼</string>
+    <string name="warning_repeat_password">請輸入重複密碼</string>
+    <string name="not_match_password">密碼不匹配</string>
 
     <!-- SignupActivity -->
     <string name="full_name">名字</string>

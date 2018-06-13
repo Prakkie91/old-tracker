@@ -18,6 +18,20 @@
     <string name="warning_date_of_birth">Please input date of birth</string>
     <string name="warning_phone">Please input phone number</string>
     <string name="network_error">Network Error</string>
+    <string name="forgot_password">Forgot Password?</string>
+
+    <!-- ForgotPasswordActivity -->
+    <string name="send">Send</string>
+    <string name="sent_email">Sent email</string>
+    <string name="forgot_password_title">Forgot Password</string>
+
+    <!-- ResetPasswordActivity -->
+    <string name="reset_password">Reset Password</string>
+    <string name="verify_code">Verify Code</string>
+    <string name="repreat_password">Repeat Password</string>
+    <string name="warning_code">Please input verify code</string>
+    <string name="warning_repeat_password">Please input repeat password</string>
+    <string name="not_match_password">Passwords does not match</string>
 
     <!-- SignupActivity -->
     <string name="full_name">Full name</string>

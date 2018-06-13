@@ -3,6 +3,7 @@ package com.odelan.track.ui.activity.Main;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -11,6 +12,7 @@ import com.odelan.track.ui.activity.Main.views.AccountView;
 import com.odelan.track.ui.activity.Main.views.HomeView;
 import com.odelan.track.ui.activity.Main.views.OrdersView;
 import com.odelan.track.ui.base.BaseActivity;
+import com.odelan.track.utils.Common;
 
 import java.util.ArrayList;
 
@@ -21,12 +23,15 @@ import im.delight.android.location.SimpleLocation;
 import static com.odelan.track.MyApplication.g_latitude;
 import static com.odelan.track.MyApplication.g_longitude;
 import static com.odelan.track.MyApplication.g_speed;
+import static com.odelan.track.MyApplication.g_status;
 import static com.odelan.track.MyApplication.gpsInterval;
 
 public class HomeActivity extends BaseActivity {
 
-    @BindView(R.id.vp_horizontal_ntb) ViewPager viewPager;
-    @BindView(R.id.ntb_horizontal) NavigationTabBar navigationTabBar;
+    @BindView(R.id.vp_horizontal_ntb)
+    ViewPager viewPager;
+    @BindView(R.id.ntb_horizontal)
+    NavigationTabBar navigationTabBar;
 
     HomeView homeView;
     OrdersView ordersView;
@@ -50,7 +55,7 @@ public class HomeActivity extends BaseActivity {
         boolean requireFineGranularity = false;
         boolean passiveMode = false;
         boolean requireNewLocation = false;
-        location = new SimpleLocation(this, requireFineGranularity, passiveMode, gpsInterval*1000, requireNewLocation);
+        location = new SimpleLocation(this, requireFineGranularity, passiveMode, gpsInterval * 1000, requireNewLocation);
 
         if (!location.hasLocationEnabled()) {
             // ask the user to enable location access
@@ -64,9 +69,35 @@ public class HomeActivity extends BaseActivity {
             public void onPositionChanged() {
                 // new location data has been received and can be accessed
 
+                long time = 0;
+                long preTime = 0;
+                double lat = 0;
+                double lng = 0;
+
+                try {
+                    time = System.currentTimeMillis();
+                    preTime = Long.valueOf(getValueFromKey("time"));
+                    lat = Double.valueOf(getValueFromKey("lat"));
+                    lng = Double.valueOf(getValueFromKey("lng"));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                double speed = 0;
+                if (preTime != 0 && lat != 0 && lng != 0) {
+                    double dist = Common.calculateDistance(lat, lng, g_latitude, g_longitude);
+                    speed = (dist / (time - preTime) * 1000);
+                    Log.d(TAG, "onPositionChanged: distance: " + dist + " speed: " + speed);
+                }
+
                 g_latitude = location.getLatitude();
                 g_longitude = location.getLongitude();
-                g_speed = location.getSpeed(); // m/s
+                //g_speed = location.getSpeed(); // m/s
+                g_speed = (float)speed;
+
+                saveKeyValue("time", String.valueOf(System.currentTimeMillis()));
+                saveKeyValue("lat", String.valueOf(location.getLatitude()));
+                saveKeyValue("lng", String.valueOf(location.getLongitude()));
             }
         });
     }
@@ -78,7 +109,7 @@ public class HomeActivity extends BaseActivity {
         // make the device update its location
         //location.beginUpdates();   // ...
 
-        if(selectedPage == 1) {
+        if (selectedPage == 1) {
             ordersView.getAllOrders();
         }
     }
@@ -176,7 +207,7 @@ public class HomeActivity extends BaseActivity {
                     homeView.hasAcceptedOrder();
                 }
 
-                if(position == 1) {
+                if (position == 1) {
                     ordersView.getAllOrders();
                 }
             }
