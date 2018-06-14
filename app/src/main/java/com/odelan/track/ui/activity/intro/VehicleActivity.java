@@ -207,7 +207,17 @@ public class VehicleActivity extends BaseActivity {
 
                                 saveOneSignalId();
                             } else {
-                                showToast(getString(R.string.failed));
+
+                                try {
+                                    String errorMsg = response.getString("errorMessage");
+                                    if (errorMsg.equals("Duplicated user")) {
+                                        showToast(getString(R.string.duplicated_user));
+                                    } else {
+                                        showToast(errorMsg);
+                                    }
+                                } catch (Exception e) {
+                                    showToast(getString(R.string.failed));
+                                }
                             }
                         } catch (Exception e) {
                             e.printStackTrace();

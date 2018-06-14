@@ -71,6 +71,7 @@
     <string name="warning_ad_area">請輸入廣告區域</string>
     <string name="warning_vehicle_photo">請輸入車輛的照片</string>
     <string name="warning_plate_number_photo">請輸入車牌號碼照片</string>
+    <string name="duplicated_user">重複的使用者</string>
 
     <!-- HomeActivity -->
     <!-- HomeView -->
