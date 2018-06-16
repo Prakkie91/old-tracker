@@ -11,6 +11,7 @@ import android.util.Log;
 
 import com.androidnetworking.AndroidNetworking;
 import com.odelan.track.service.LocationService;
+import com.odelan.track.utils.Common;
 import com.odelan.track.utils.GPSTracker;
 import com.onesignal.OSNotification;
 import com.onesignal.OSNotificationOpenResult;
@@ -32,9 +33,9 @@ public class MyApplication extends Application {
     public static String g_address = "";
     public static double g_latitude = 0;
     public static double g_longitude = 0;
-    public static float g_speed = 0;
+    public static double g_speed = 0;
     public static String g_status = "invalid"; // 'valid' , 'invalid'
-    public static int gpsInterval = 60; //second 1min
+    public static int gpsInterval = 10; //second 1min
     public static boolean isGPSServiceRunning = false;
 
     public static Intent locationServiceintent;
@@ -71,6 +72,8 @@ public class MyApplication extends Application {
 
         one_id_android = userID;
     }
+
+
 
     private class QworkNotificationReceivedHandler implements OneSignal.NotificationReceivedHandler {
         @Override

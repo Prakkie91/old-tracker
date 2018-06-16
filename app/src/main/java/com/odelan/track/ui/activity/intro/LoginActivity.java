@@ -111,14 +111,33 @@ public class LoginActivity extends BaseActivity {
                                 User me = LoganSquare.parse(user.toString(), User.class);
                                 saveKeyValue("user", user.toString());
 
+                                saveKeyValue("email", emailET.getText().toString());
+                                saveKeyValue("password", passworkET.getText().toString());
+                                startActivity(new Intent(mContext, HomeActivity.class));
 
-                                saveOneSignalId();
+                                //saveOneSignalId();
                             } else {
                                 showToast(getString(R.string.failed));
                             }
                         } catch (Exception e) {
                             e.printStackTrace();
-                            showToast(getString(R.string.failed));
+                            //showToast(getString(R.string.failed));
+
+                            try {
+                                boolean status = response.getBoolean("status");
+                                if (status) {
+                                    JSONObject user = response.getJSONObject("data");
+                                    User me = LoganSquare.parse(user.toString(), User.class);
+                                    saveKeyValue("user", user.toString());
+
+                                    //saveOneSignalId();
+                                } else {
+                                    showToast(getString(R.string.failed));
+                                }
+                            } catch (Exception ex) {
+                                ex.printStackTrace();
+                                showToast(getString(R.string.failed));
+                            }
                         }
                     }
                     @Override

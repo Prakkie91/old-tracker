@@ -89,11 +89,11 @@ public class LocationService extends IntentService {
                         try {
                             int status = response.getInt("status");
                             if (status == 1) {
-                                //Common.showToast(LocationService.this, "uploaded");
+
                                 Common.showToast(LocationService.this,
                                         "lat=" + MyApplication.g_latitude
                                                 + "  lng=" + MyApplication.g_longitude
-                                                + "  speed=" + MyApplication.g_speed + "Km");
+                                                + "  speed=" + MyApplication.g_speed + "m/s");
                             } else {
                                 //Common.showToast(LocationService.this, "failed status = 0");
                             }

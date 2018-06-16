@@ -119,7 +119,14 @@ public class HomeView extends BaseView {
                     }
                 });
 
-                if (!hasPermissionsGranted(PERMISSIONS)) {
+                googleMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
+                    @Override
+                    public void onMapLoaded() {
+                        readyGPS();
+                    }
+                });
+
+                /*if (!hasPermissionsGranted(PERMISSIONS)) {
                     requestPermissions(PERMISSIONS);
                 } else {
                     googleMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
@@ -128,7 +135,7 @@ public class HomeView extends BaseView {
                             readyGPS();
                         }
                     });
-                }
+                }*/
             }
         });
     }
