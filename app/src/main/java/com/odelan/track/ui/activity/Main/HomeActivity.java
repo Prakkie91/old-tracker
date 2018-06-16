@@ -165,11 +165,14 @@ public class HomeActivity extends BaseActivity {
         double speed = 0;
         if (preTime != 0 && lat != 0 && lng != 0) {
             double dist = Common.calculateDistance(lat, lng, g_latitude, g_longitude);
-            speed = (dist / (time - preTime) * 1000);
+            if ((time - preTime) > 30 * 1000) { // 30s
+
+                speed = (dist / (time - preTime) * 1000);
+            }
             //speed = (dist / (time - preTime));
             Log.d(TAG, "onPositionChanged: distance: " + dist + " speed: " + speed);
 
-            showToast("lat=" + g_latitude + " lng=" + g_longitude + " speed=" + speed + "m/s");
+            //showToast("lat=" + g_latitude + " lng=" + g_longitude + " speed=" + speed + "m/s");
         }
 
         //g_speed = location.getSpeed(); // m/s
