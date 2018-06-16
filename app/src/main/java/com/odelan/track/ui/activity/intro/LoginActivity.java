@@ -52,9 +52,9 @@ public class LoginActivity extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (multiLanguageHelper.getCurrentLanguage() == null ||
-                multiLanguageHelper.getCurrentLanguage().equals("") ||
-                multiLanguageHelper.getCurrentLanguage().equals(MultiLanguageHelper.LANG_VAL_CHINA)) {
+        if (multiLanguageHelper.getCurrentLanguage() == null || multiLanguageHelper.getCurrentLanguage().equals("")) {
+            setLanguage(MultiLanguageHelper.LANG_VAL_CHINA);
+        } else if (multiLanguageHelper.getCurrentLanguage().equals(MultiLanguageHelper.LANG_VAL_CHINA)) {
             zhTV.setTextColor(getResources().getColor(R.color.txt_gray_color));
             enTV.setTextColor(getResources().getColor(R.color.white));
         } else {
