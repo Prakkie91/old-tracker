@@ -172,7 +172,7 @@ public class HomeActivity extends BaseActivity {
             //speed = (dist / (time - preTime));
             Log.d(TAG, "onPositionChanged: distance: " + dist + " speed: " + speed);
 
-            //showToast("lat=" + g_latitude + " lng=" + g_longitude + " speed=" + speed + "m/s");
+            showToast("lat=" + g_latitude + " lng=" + g_longitude + " speed=" + speed + "m/s");
         }
 
         //g_speed = location.getSpeed(); // m/s
