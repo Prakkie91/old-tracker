@@ -54,10 +54,12 @@ public class OrdersView extends BaseView {
     }
 
     public void getAllOrders () {
+        User me = mContext.getMe();
         mContext.showLoading();
-        AndroidNetworking.post(SERVER_URL + "order/getAllOrders")
+        AndroidNetworking.post(SERVER_URL + "order/getAllSameTypeOrdersWithUserId")
                 .addHeaders("X-API-KEY", X_API_KEY)
-                .setTag("getAllOrders")
+                .addBodyParameter("user_id", me.userid)
+                .setTag("getAllSameTypeOrdersWithUserId")
                 .setPriority(Priority.LOW)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {

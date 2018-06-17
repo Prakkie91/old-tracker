@@ -53,6 +53,8 @@ import butterknife.OnClick;
 
 import static com.odelan.track.MyApplication.SERVER_URL;
 import static com.odelan.track.MyApplication.X_API_KEY;
+import static com.odelan.track.MyApplication.g_latitude;
+import static com.odelan.track.MyApplication.g_longitude;
 import static com.odelan.track.MyApplication.g_status;
 import static com.odelan.track.MyApplication.isGPSServiceRunning;
 
@@ -280,8 +282,8 @@ public class HomeView extends BaseView {
             addCustomMarker(item.aid, latLng);
         }
 
-        //googleMapHelper.moveCameraPoint(myLocation, 9);
-        googleMapHelper.moveCameraBounds(bounds, 100);
+        googleMapHelper.moveCameraPoint(new LatLng(g_latitude, g_longitude), 9);
+        //googleMapHelper.moveCameraBounds(bounds, 100);
     }
 
     private boolean hasPermissionsGranted (String[] permissions) {
