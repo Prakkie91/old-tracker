@@ -24,6 +24,7 @@ import android.view.ViewGroup;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.google.android.gms.maps.GoogleMap;
+import com.odelan.track.MyApplication;
 import com.odelan.track.R;
 import com.odelan.track.ui.activity.Main.views.AccountView;
 import com.odelan.track.ui.activity.Main.views.HomeView;
@@ -162,21 +163,18 @@ public class HomeActivity extends BaseActivity {
         g_latitude = location.getLatitude();
         g_longitude = location.getLongitude();
 
-        double speed = 0;
+        g_speed = 0;
         if (preTime != 0 && lat != 0 && lng != 0) {
             double dist = Common.calculateDistance(lat, lng, g_latitude, g_longitude);
-            if ((time - preTime) > 30 * 1000) { // 30s
+            /*if ((time - preTime) > MyApplication.gpsInterval * 1000) { // 30s
 
                 speed = (dist / (time - preTime) * 1000);
-            }
-            //speed = (dist / (time - preTime));
-            Log.d(TAG, "onPositionChanged: distance: " + dist + " speed: " + speed);
+            }*/
+            g_speed = (dist / ((time - preTime) / 1000));
+            Log.d(TAG, "onPositionChanged: distance: " + dist + " speed: " + g_speed);
 
             //showToast("lat=" + g_latitude + " lng=" + g_longitude + " speed=" + speed + "m/s");
         }
-
-        //g_speed = location.getSpeed(); // m/s
-        g_speed = speed;
 
         saveKeyValue("time", String.valueOf(System.currentTimeMillis()));
         saveKeyValue("lat", String.valueOf(location.getLatitude()));
