@@ -52,6 +52,7 @@ public class LoginActivity extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        String c = multiLanguageHelper.getCurrentLanguage();
         if (multiLanguageHelper.getCurrentLanguage() == null || multiLanguageHelper.getCurrentLanguage().equals("")) {
             setLanguage(MultiLanguageHelper.LANG_VAL_CHINA);
         } else if (multiLanguageHelper.getCurrentLanguage().equals(MultiLanguageHelper.LANG_VAL_CHINA)) {

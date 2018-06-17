@@ -53,10 +53,10 @@ import butterknife.OnClick;
 
 import static com.odelan.track.MyApplication.SERVER_URL;
 import static com.odelan.track.MyApplication.X_API_KEY;
-import static com.odelan.track.MyApplication.g_latitude;
-import static com.odelan.track.MyApplication.g_longitude;
 import static com.odelan.track.MyApplication.g_status;
 import static com.odelan.track.MyApplication.isGPSServiceRunning;
+
+
 
 public class HomeView extends BaseView {
 
@@ -83,6 +83,9 @@ public class HomeView extends BaseView {
 
     boolean isMapReady = false;
     String hasOrder = "false";
+
+    double mLat = 0;
+    double mLng = 0;
 
     @Override
     protected int getLayoutResID() {
@@ -147,8 +150,8 @@ public class HomeView extends BaseView {
         if(mContext != null) {
             MyApplication.g_GPSTracker = new GPSTracker(mContext);
             if (MyApplication.g_GPSTracker.canGetLocation()) {
-                MyApplication.g_latitude = MyApplication.g_GPSTracker.getLatitude();
-                MyApplication.g_longitude = MyApplication.g_GPSTracker.getLongitude();
+                mLat = MyApplication.g_GPSTracker.getLatitude();
+                mLng = MyApplication.g_GPSTracker.getLongitude();
 
                 googleMap.setMyLocationEnabled(true);
                 hasAcceptedOrder();
@@ -282,7 +285,7 @@ public class HomeView extends BaseView {
             addCustomMarker(item.aid, latLng);
         }
 
-        googleMapHelper.moveCameraPoint(new LatLng(g_latitude, g_longitude), 9);
+        googleMapHelper.moveCameraPoint(new LatLng(mLat, mLng), 9);
         //googleMapHelper.moveCameraBounds(bounds, 100);
     }
 
