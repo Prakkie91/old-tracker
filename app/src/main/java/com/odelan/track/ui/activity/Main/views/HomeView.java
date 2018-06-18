@@ -236,10 +236,12 @@ public class HomeView extends BaseView {
         if (!isMapReady) {
             return;
         }
+        User me = mContext.getMe();
         mContext.showLoading();
-        AndroidNetworking.post(SERVER_URL + "order/getAllRegions")
+        AndroidNetworking.post(SERVER_URL + "order/getAllSameTypeRegionsWithUserId")
                 .addHeaders("X-API-KEY", X_API_KEY)
-                .setTag("getAllRegions")
+                .addBodyParameter("user_id", me.userid)
+                .setTag("getAllSameTypeRegionsWithUserId")
                 .setPriority(Priority.LOW)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {

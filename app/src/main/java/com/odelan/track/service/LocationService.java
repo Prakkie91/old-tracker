@@ -78,7 +78,6 @@ public class LocationService extends IntentService {
                 .addBodyParameter("lat", String.valueOf(g_latitude))
                 .addBodyParameter("lng", String.valueOf(g_longitude))
                 .addBodyParameter("speed", String.valueOf(g_speed))
-                //.addBodyParameter("speed", "20")
                 .addBodyParameter("status", g_status)
                 .setTag("saveRecord")
                 .setPriority(Priority.LOW)
@@ -89,10 +88,10 @@ public class LocationService extends IntentService {
                         try {
                             int status = response.getInt("status");
                             if (status == 1) {
-                                Common.showToast(LocationService.this,
+                                /*Common.showToast(LocationService.this,
                                         "lat=" + MyApplication.g_latitude
                                                 + "  lng=" + MyApplication.g_longitude
-                                                + "  speed=" + MyApplication.g_speed + "m/s");
+                                                + "  speed=" + MyApplication.g_speed + "m/s");*/
                                 g_speed = 0;
                             } else {
                                 //Common.showToast(LocationService.this, "failed status = 0");

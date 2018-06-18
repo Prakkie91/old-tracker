@@ -17,6 +17,7 @@ import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.bluelinelabs.logansquare.LoganSquare;
 import com.odelan.track.R;
+import com.odelan.track.data.model.AdRegionModel;
 import com.odelan.track.data.model.Order;
 import com.odelan.track.data.model.User;
 import com.odelan.track.ui.activity.Main.HomeActivity;
@@ -128,7 +129,16 @@ public class OrdersView extends BaseView {
         public void onBindViewHolder(final RecyclerView.ViewHolder mholder, final int position) {
             final RecyclerViewAdapter.ViewHolder holder = (RecyclerViewAdapter.ViewHolder) mholder;
             holder.mItem = mList.get(position);
-            String desc = mContext.getString(R.string.order) + holder.mItem.oid + ", " + holder.mItem.car_type + ", " + holder.mItem.amount;
+            List<AdRegionModel> ad_regions = holder.mItem.ad_regions;
+            String ads = "";
+            for (AdRegionModel a : ad_regions) {
+                ads += a.region + " & ";
+            }
+            if (ads.length()>0) {
+                ads = ads.substring(0, ads.length()-3);
+            }
+
+            String desc = mContext.getString(R.string.order) + holder.mItem.oid + ", " + holder.mItem.ad_theme + ", " + ads + ", $" + holder.mItem.amount + "/m";
             holder.tv.setText(desc);
 
             User me = mContext.getMe();
