@@ -57,7 +57,7 @@
     <string name="vehicle_type">車種</string>
     <string name="vehicle_number">車牌號</string>
     <string name="vehicle_expire_date">車牌號到期日</string>
-    <string name="van">仔</string>
+    <string name="van">Van 仔</string>
     <string name="five_truck">5.5 噸密斗</string>
     <string name="nine_truck">9 噸密斗</string>
     <string name="tour_bus">旅遊巴</string>

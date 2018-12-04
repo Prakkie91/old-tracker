@@ -27,7 +27,7 @@ import java.util.List;
  */
 public class MyApplication extends Application {
 
-    public static final String SERVER_URL = "http://ec2-34-229-142-61.compute-1.amazonaws.com/DriverTrack/api/";
+    public static final String SERVER_URL = "http://ec2-35-173-211-177.compute-1.amazonaws.com/DriverTrack/api/";
     public static final String X_API_KEY = "anonymous";
 
     public static String g_address = "";

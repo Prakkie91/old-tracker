@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -72,7 +73,7 @@ public class VehicleActivity extends BaseActivity {
     final String VEHICLE_NUMBER_PHOTO = "vehicle_number_photo";
     String photoType = "";
     String carType = "";
-
+    int car_type_id;
     @Override
     protected int getLayoutResID() {
         return R.layout.activity_vehicle;
@@ -100,6 +101,8 @@ public class VehicleActivity extends BaseActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if(spinner.getSelectedItem() == getString(R.string.vehicle_type)) {
+
+                    car_type_id = i;
 
                 } else {
                     carType = vtypes.get(i);
@@ -174,6 +177,10 @@ public class VehicleActivity extends BaseActivity {
         }
 
         showLoading();
+
+        Log.e("cartype", carType);
+
+
         AndroidNetworking.upload(SERVER_URL + "user/signup")
                 .addHeaders("X-API-KEY", X_API_KEY)
                 .addMultipartFile("photo_vehicle", g_VehiclePhoto)
@@ -187,7 +194,9 @@ public class VehicleActivity extends BaseActivity {
                 .addMultipartParameter("driving_license_number", driving_license_number)
                 .addMultipartParameter("driving_license_expiry_date", expire_date)
                 .addMultipartParameter("driving_license_class", license_class)
-                .addMultipartParameter("car_type", carType)
+                .addMultipartParameter("car_type_id",  String.valueOf(car_type_id))
+
+
                 .addMultipartParameter("vehicle_plate_number", numberET.getText().toString())
                 .addMultipartParameter("plate_number_expiry_date", expireDateET.getText().toString())
                 .setPriority(Priority.LOW)
@@ -216,12 +225,17 @@ public class VehicleActivity extends BaseActivity {
                                         showToast(errorMsg);
                                     }
                                 } catch (Exception e) {
+                                  //  Log.e("error1", e.getLocalizedMessage());
                                     showToast(getString(R.string.failed));
+
                                 }
                             }
                         } catch (Exception e) {
                             e.printStackTrace();
                             showToast(getString(R.string.failed));
+                          //  Log.e("error2", e.getLocalizedMessage());
+                          //  Log.e("error2", "");
+
                         }
                     }
 
@@ -229,6 +243,9 @@ public class VehicleActivity extends BaseActivity {
                     public void onError(ANError error) {
                         dismissLoading();
                         showToast(getString(R.string.network_error));
+
+                      //  Log.e("error3", String.valueOf(error.getErrorCode()));
+
                     }
                 });
     }
